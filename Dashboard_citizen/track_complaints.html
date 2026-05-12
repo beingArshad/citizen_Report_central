@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Complaints - Citizen Dashboard</title>
+  <link rel="stylesheet" href="./citizen.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Saira:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .progress-timeline {
+      position: relative;
+      padding-left: 30px;
+      margin-top: 20px;
+    }
+    .progress-timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--glass-border);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -29px;
+      top: 5px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 2px solid var(--primary);
+    }
+    .timeline-item.completed::before {
+      background: var(--primary);
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+    }
+    .timeline-item h4 {
+      margin-bottom: 5px;
+      font-size: 1.1rem;
+      color: var(--text-dark);
+    }
+    .timeline-item p {
+      font-size: 0.95rem;
+      color: var(--text-light);
+    }
+  </style>
+</head>
+<body>
+  
+  <nav>  
+    <div class="logo-container">
+      <img src="../assets/finallogo.png" alt="Logo" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(102,126,234,0.4);">
+      <b>Welcome, Afrah</b>
+    </div>
+    <div class="nav-toggle" onclick="toggleNav()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+    <ul id="navMenu">
+      <li><a href="./citizen.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+      <li><a href="./notification.html"><i class="fa-solid fa-bell"></i> Notifications</a></li>
+      <li><a href="./profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+      <li><a href="./home.html" style="color: #ef4444;"><i class="fa-solid fa-right-from-bracket" style="color: #ef4444;"></i> Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="main-container" style="margin-top: 40px;">
+    <div class="page-header">
+      <h1>Track Complaints</h1>
+      <p>View the detailed progress and assigned officers for your issues.</p>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Complaint ID</th>
+            <th>Issue</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#COMP-1045</td>
+            <td>Broken Streetlight near Main Road</td>
+            <td>Electrical</td>
+            <td>10 May 2026</td>
+            <td><button class="btn btn-sm" onclick="openProgress('1045')">View Progress</button></td>
+          </tr>
+          <tr>
+            <td>#COMP-1008</td>
+            <td>Potholes on Village Entry Road</td>
+            <td>Infrastructure</td>
+            <td>15 Apr 2026</td>
+            <td><button class="btn btn-sm" onclick="openProgress('1008')">View Progress</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div style="text-align: center;">
+      <a href="./citizen.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
+    </div>
+  </div>
+
+  <!-- Progress Modal -->
+  <div id="progressModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Complaint Progress</h2>
+        <span class="close-btn" onclick="closeProgress()"><i class="fa-solid fa-xmark"></i></span>
+      </div>
+      <div id="progressDetails">
+        <!-- Content injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-info">
+        <h3>Rural Governance</h3>
+        <p>Empowering citizens and bridging the gap between villages and administration.</p>
+        <div class="contact-info">
+          <p><i class="fa-solid fa-envelope"></i> support@ruralgovernance.in</p>
+          <p><i class="fa-solid fa-phone"></i> +91 1800-123-4567</p>
+        </div>
+      </div>
+      <div class="footer-social">
+        <h4>Connect With Us</h4>
+        <div class="social-links">
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Rural Governance Platform | All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      document.getElementById("navMenu").classList.toggle("active");
+    }
+
+    const modal = document.getElementById('progressModal');
+    const detailsContainer = document.getElementById('progressDetails');
+
+    const progressData = {
+      '1045': {
+        filingDate: '10 May 2026, 09:30 AM',
+        reportCreated: true,
+        approved: true,
+        officer: 'Ramesh Kumar',
+        visited: false
+      },
+      '1008': {
+        filingDate: '15 Apr 2026, 02:15 PM',
+        reportCreated: true,
+        approved: true,
+        officer: 'Sanjay Sharma',
+        visited: true
+      }
+    };
+
+    function openProgress(id) {
+      const data = progressData[id];
+      if(!data) return;
+
+      detailsContainer.innerHTML = `
+        <div style="margin-bottom: 20px; padding: 15px; background: rgba(102, 126, 234, 0.1); border-radius: 8px;">
+          <strong>Complaint ID:</strong> #COMP-${id}<br>
+          <strong>Assigned Officer:</strong> <i class="fa-solid fa-user-tie" style="color: var(--primary);"></i> ${data.officer}
+        </div>
+        <div class="progress-timeline">
+          <div class="timeline-item completed">
+            <h4>Complaint Filed</h4>
+            <p>Date: ${data.filingDate}</p>
+          </div>
+          <div class="timeline-item ${data.reportCreated ? 'completed' : ''}">
+            <h4>Report Generation</h4>
+            <p>${data.reportCreated ? 'Initial assessment report created.' : 'Pending assessment.'}</p>
+          </div>
+          <div class="timeline-item ${data.approved ? 'completed' : ''}">
+            <h4>Approval Status</h4>
+            <p>${data.approved ? 'Approved by Panchayat office.' : 'Awaiting approval.'}</p>
+          </div>
+          <div class="timeline-item ${data.visited ? 'completed' : ''}">
+            <h4>Site Visit</h4>
+            <p>${data.visited ? 'Officer ' + data.officer + ' visited the site.' : 'Officer visit scheduled.'}</p>
+          </div>
+          <div class="timeline-item">
+            <h4>Resolution</h4>
+            <p>Work in progress. Estimated completion in 3 days.</p>
+          </div>
+        </div>
+      `;
+      
+      modal.classList.add('show');
+    }
+
+    function closeProgress() {
+      modal.classList.remove('show');
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        closeProgress();
+      }
+    }
+  </script>
+</body>
+</html>

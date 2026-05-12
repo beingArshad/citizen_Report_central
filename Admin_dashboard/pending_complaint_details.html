@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <title>Complaints</title>
+
+    <style>
+        :root {
+            --blue: #0a6cff;
+            --black: #0f172a;
+            --white: #fff;
+            --light-gray: #f4f6fb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Segoe UI, Arial, sans-serif;
+        }
+
+        body {
+            background: var(--light-gray);
+        }
+
+        /* NAVBAR */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            z-index: 3000;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #000;
+            font-weight: 500;
+        }
+
+        nav ul li a:hover {
+            color: var(--blue);
+        }
+
+        /* Logout button styled as link */
+        .login_btn {
+            padding: 10px 18px;
+            border-radius: 80px;
+            border: 1px solid black;
+            text-decoration: none;
+            color: black;
+            cursor: pointer;
+        }
+
+        .login_btn:hover {
+            background: var(--blue);
+            color: white;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 240px;
+            height: 100vh;
+            background: var(--black);
+            color: white;
+            padding: 25px 20px;
+            position: fixed;
+            top: 70px;
+            left: 0;
+        }
+
+        .sidebar a {
+            display: flex;
+            gap: 12px;
+            padding: 12px;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: var(--blue);
+            transform: translateX(6px);
+        }
+
+
+
+        h2 {
+            margin-bottom: 15px;
+            font-size: 25px;
+            color: #1d4ed8
+        }
+
+        label {
+            font-size: 20px;
+        }
+
+
+
+
+
+
+
+        h1 {
+            margin-left: 400px;
+            margin-bottom: 13px;
+            color: #1d4ed8
+        }
+
+
+        .container {
+
+            margin-top: 100px;
+            margin-left: 260px;
+            width: 1230px;
+
+
+
+        }
+
+        .info-grid {
+            display: grid;
+            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            margin-bottom: 24px;
+        }
+
+        .info-box {
+            background: #f8fbff;
+            border: 1px solid #dbe9ff;
+            border-radius: 8px;
+            padding: 14px;
+        }
+
+        .info-box h2 {
+            font-size: 16px;
+            color: #1e3a8a;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        .info-box p {
+            font-size: 14px;
+            color: #314155;
+            margin: 0;
+        }
+
+        .description {
+            background: #f8fbff;
+            border: 1px solid #dbe9ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+
+
+        }
+
+
+        .description p {
+            margin-bottom: 10px;
+            color: #1e3a8a;
+        }
+
+        .description h2 {
+            color: #1e3a8a;
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--black);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 220px;
+        }
+
+        .back-link {
+            text-decoration: none;
+        }
+
+        .btn {
+            border: none;
+            color: #fff;
+            padding: 11px 18px;
+            border-radius: 7px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+
+        }
+
+        .accept {
+            background: #16a34a;
+
+
+        }
+
+        .accept:hover {
+            background: #15803d;
+        }
+
+        .reject {
+            background: #dc2626;
+
+        }
+
+        .reject:hover {
+            background: #b91c1c;
+        }
+
+        .photo-card {
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #dbe9ff;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            margin-left: 460px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">
+            <img src="../assets/finallogo.png" alt="Rural Governance Logo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(10,108,255,0.4);">
+        </div>
+
+        <ul>
+            <li><a href="#"><i class="fa fa-house"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-phone"></i> Contact</a></li>
+            <li><a href="#"><i class="fa fa-info-circle"></i> About</a></li>
+        </ul>
+
+        <a href="/home.html" class="login_btn">Log out 👤</a>
+    </nav>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <a href="./admin_dashboard.html"><i class="fa-solid fa-building"></i> Dashboard</a>
+        <a class="active" href="#"><i class="fa-solid fa-file-circle-exclamation"></i> Complaints</a>
+        <a href="./departmental_complaints.html"><i class="fa-solid fa-building"></i> Departments</a>
+        <!-- <a href="./analytics.html"><i class="fa-solid fa-chart-pie"></i> Analytics</a> -->
+        <a href="./system.html"><i class="fa-solid fa-gear"></i> System</a>
+        <a href="./officers_list.html"><i class="fa-solid fa-user"></i> Officers</a>
+
+    </div>
+
+    <!-- ----MAIN----- -->
+
+    <div class="container">
+        <a href="pending_complaints.html" class="back-link"><i class="fa fa-arrow-left"></i> Back to Pending
+            Complaints</a>
+        <h1>Complaint Details</h1>
+        <div style="margin-left: 490px; margin-bottom: 30px;">
+            <span id="statusLabel"
+                style="display:inline-block; background:#f59e0b; color:#fff; padding:8px 14px; border-radius:999px; font-weight:700;">Pending</span>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-box">
+                <h2>Category</h2>
+                <p>Water</p>
+            </div>
+            <div class="info-box">
+                <h2>Date and Time</h2>
+                <p>23-03-2026 09:30 AM</p>
+            </div>
+            <div class="info-box">
+                <h2>Location</h2>
+                <p>Main Street, Ward 5</p>
+            </div>
+        </div>
+
+        <div class="description">
+            <h2>Description</h2>
+            <p>The complaint is regarding a severe water leakage on Main Street, near Ward 5 that has been active for
+                three days. The leak is affecting nearby homes and the road surface, causing erosion and making the area
+                hazardous for pedestrians and vehicles. Immediate inspection and repair are required to prevent further
+                damage and ensure public safety.</p>
+        </div>
+
+        <div class="photo-card">
+            <img src="https://via.placeholder.com/1000x520?text=Complaint+Photo+Preview" alt="Complaint Photo" />
+        </div>
+
+        <div class="actions">
+            <button class="btn accept" onclick="acceptComplaint();">Accept</button>
+            <button class="btn reject" onclick="showRejectCard();">Reject</button>
+        </div>
+
+        <div id="rejectCard"
+            style="display:none; margin-top: 20px; border: 1px solid #fca5a5; background:#fff1f2; padding:18px; border-radius:8px;">
+            <h2 style="color:#b91c1c; margin-top:0;">Reject Complaint</h2>
+            <textarea id="rejectReason" placeholder="Enter rejection reason..."
+                style="width:100%; min-height:120px; border:1px solid #fca5a5; border-radius:6px; padding:10px; font-size:14px;"></textarea>
+            <div style="margin-top:12px; display:flex; gap:10px; justify-content:flex-end;">
+                <button
+                    style="border:none;background:#6b7280;color:#fff;padding:10px 16px;border-radius:6px;cursor:pointer;"
+                    onclick="hideRejectCard();">Cancel</button>
+                <button class="btn reject" onclick="submitReject();">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showRejectCard() {
+            document.getElementById('rejectCard').style.display = 'block';
+            document.getElementById('rejectReason').focus();
+        }
+        function hideRejectCard() {
+            document.getElementById('rejectCard').style.display = 'none';
+            document.getElementById('rejectReason').value = '';
+        }
+        function acceptComplaint() {
+            const statusElement = document.getElementById('statusLabel');
+            statusElement.textContent = 'Accepted';
+            statusElement.style.background = '#16a34a';
+            document.querySelector('.accept').disabled = true;
+            document.querySelector('.accept').style.cursor = 'not-allowed';
+            alert('Complaint accepted.');
+        }
+
+        function submitReject() {
+            const reason = document.getElementById('rejectReason').value.trim();
+            if (!reason) {
+                alert('Please enter a rejection reason.');
+                return;
+            }
+            const statusElement = document.getElementById('statusLabel');
+            statusElement.textContent = 'Rejected';
+            statusElement.style.background = '#dc2626';
+            hideRejectCard();
+            alert('Complaint rejected. Reason: ' + reason);
+        }
+    </script>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Smart Civic Portal</p>
+        <p>Email: Ruralgovernance@gmail.com</p>
+    </footer>
+
+</body>
+
+</html>

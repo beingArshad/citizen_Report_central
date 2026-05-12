@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanitation Department Complaints</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+  --blue:#0a6cff;
+  --black:#0f172a;
+  --bg:#f4f6fb;
+  --green:#16a34a;
+  --red:#dc2626;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Segoe UI, Arial, sans-serif;
+}
+
+body{background:var(--bg);}
+
+/* SIDEBAR
+.sidebar{
+  width:240px;
+  height:100vh;
+  background:var(--black);
+  padding:25px;
+  position:fixed;
+}
+
+.sidebar a{
+  display:flex;
+  gap:12px;
+  color:#fff;
+  text-decoration:none;
+  padding:12px;
+  border-radius:8px;
+  margin-bottom:12px;
+}
+
+.sidebar a.active,
+.sidebar a:hover{background:var(--blue);}
+
+/* MAIN */
+.main{
+  
+  padding:30px;
+} 
+
+/* HEADER */
+.header{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.back-btn{
+  background:var(--blue);
+  color:#fff;
+  padding:6px 12px;
+  border-radius:6px;
+  text-decoration:none;
+}
+
+/* CARDS */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+  margin-bottom:25px;
+}
+
+.card{
+  background:#fff;
+  padding:20px;
+  border-radius:14px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.card p{
+  font-size:28px;
+  font-weight:bold;
+  color:var(--blue);
+}
+
+/* CONTROLS */
+.controls{
+  display:flex;
+  gap:15px;
+  margin-bottom:15px;
+}
+
+.controls input,
+.controls select{
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #d1d5db;
+}
+
+/* TABLE */
+.table-container{
+  background:#fff;
+  padding:20px;
+  border-radius:14px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,td{
+  padding:14px;
+  border-bottom:1px solid #e5e7eb;
+}
+
+th{background:#f1f5f9;}
+
+.status{
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:600;
+}
+
+.pending{background:#fee2e2;color:var(--red);}
+.resolved{background:#dcfce7;color:var(--green);}
+
+.view-btn{
+  background:var(--blue);
+  color:#fff;
+  padding:6px 10px;
+  border-radius:6px;
+  font-size:14px;
+  text-decoration:none;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .sidebar{display:none;}
+  .main{margin-left:0;}
+}
+
+footer {
+     background: var(--black);
+      color: white;
+      padding: 40px;
+      text-align: center;
+      margin-top: 60px;
+      
+    }
+
+    footer .logos {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    footer .logos .list {
+      list-style: none;
+    }
+
+    footer .logos .links {
+      width: 60px;
+      height: 60px;
+      background-color: #fff;
+      text-align: center;
+      line-height: 60px;
+      font-size: 24px;
+      display: block;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      border: 3px solid #fff;
+      z-index: 1;
+      transition: transform 0.3s;
+    }
+
+    footer .logos .links .icon {
+      position: relative;
+      color: #262626;
+      transition: .5s;
+      z-index: 3;
+    }
+
+    footer .logos .links:hover .icon {
+      color: #fff;
+      transform: rotateY(360deg);
+    }
+
+    footer .logos .links:before {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transition: .5s;
+      z-index: 2;
+    }
+
+    footer .logos .links:hover:before {
+      top: 0;
+    }
+
+    footer .logos .list:nth-child(1) .links:before {
+      background: #3b5999; /* Facebook */
+    }
+
+    footer .logos .list:nth-child(2) .links:before {
+      background: #E4405F; /* Instagram */
+    }
+
+    footer .logos .list:nth-child(3) .links:before {
+      background: #55acee; /* Twitter */
+    }
+
+ footer .logos .list:nth-child(4) .links:before {
+      background: #55acee; /* Twitter */
+    }
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<!-- <div class="sidebar">
+  <a href="index.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+  <a href="complaints.html"><i class="fa-solid fa-file-circle-exclamation"></i> Complaints</a>
+  <a class="active" href="departments.html"><i class="fa-solid fa-building"></i> Departments</a>
+</div> -->
+
+<div class="main">
+
+<!-- HEADER -->
+<div class="header">
+  <a href="./departmental_complaints.html" class="back-btn"><i class="fa fa-arrow-left"></i></a>
+  <h1>Sanitation Department</h1>
+</div>
+
+<!-- SUMMARY -->
+<div class="cards">
+  <div class="card"><h4>Total Complaints</h4><p>25</p></div>
+  <div class="card"><h4>Pending</h4><p>14</p></div>
+  <div class="card"><h4>Resolved</h4><p>11</p></div>
+</div>
+
+<!-- SEARCH + FILTER -->
+<div class="controls">
+  <input type="text" id="searchInput" placeholder="Search complaints...">
+  <select id="statusFilter">
+    <option value="all">All</option>
+    <option value="pending">Pending</option>
+    <option value="resolved">Resolved</option>
+  </select>
+</div>
+
+<!-- TABLE -->
+<div class="table-container">
+<table id="complaintsTable">
+<thead>
+<tr>
+<th>ID</th><th>Citizen</th><th>Issue</th><th>Date</th><th>Status</th><th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+<tr><td>SD-001</td><td>Rahul Patil</td><td>Garbage not collected</td><td>01-01-2026</td><td class="pending">Pending</td><td><a class="view-btn">View</a></td></tr>
+<tr><td>SD-002</td><td>Anita Sharma</td><td>Overflowing dustbin</td><td>01-01-2026</td><td class="resolved">Resolved</td><td><a class="view-btn">View</a></td></tr>
+<tr><td>SD-003</td><td>Ramesh Yadav</td><td>Bad smell near garbage point</td><td>02-01-2026</td><td class="pending">Pending</td><td><a class="view-btn">View</a></td></tr>
+<tr><td>SD-004</td><td>Pooja Mehta</td><td>Street cleaning not done</td><td>02-01-2026</td><td class="resolved">Resolved</td><td><a class="view-btn">View</a></td></tr>
+<tr><td>SD-005</td><td>Amit Verma</td><td>Garbage vehicle skipped area</td><td>03-01-2026</td><td class="pending">Pending</td><td><a class="view-btn">View</a></td></tr>
+
+<tr><td>SD-006</td><td>Neha Joshi</td><td>Open dumping on roadside</td><td>03-01-2026</td><td class="pending">Pending</td><td><a class="view-btn">View</a></td></tr>
+<tr><td>SD-007</td><td>Vikas Rao</td><td>Drainage water overflow</td><td>04-01-2026</td><td class="resolved">Resolved</td><td><a class="view-btn">View</a></td></tr>
+<tr><td>SD-008</td><td>Kavita Nair</td><td>Blocked drainage</td><td>04-01-2026</td><td class="pending">Pending</td><td><a class="view-btn">View</a></td></tr>
+<tr><td>SD-009</td><td>Manoj Gupta</td><td>Garbage burning issue</td><td>05-01-2026</td><td class="resolved">Resolved</td><td><a class="view-btn">View</a></td></tr>
+<tr><td>SD-010</td><td>Sunita Reddy</td><td>Dead animal removal delay</td><td>05-01-2026</td><td class="pending">Pending</td><td><a class="view-btn">View</a></td></tr>
+
+<tr><td>SD-011</td><td>Arjun Malhotra</td><td>No dustbin in area</td><td>06-01-2026</td><td class="pending">Pending</td><td><a class="view-btn">View</a></td></tr>
+<tr><td>SD-012</td><td>Meena Iyer</td><td>Unclean public toilet</td><td>06-01-2026</td><td class="resolved">Resolved</td><td><a class="view-btn">View</a></td></tr>
+<tr><td>SD-013</td><td>Suresh Yadav</td><td>Garbage scattered by animals</td><td>07-01-2026</td><td class="pending">Pending</td><td><a class="view-btn">View</a></td></tr>
+<tr><td>SD-014</td><td>Nikita Shah</td><td>Drain cover broken</td><td>07-01-2026</td><td class="resolved">Resolved</td><td><a class="view-btn">View</a></td></tr>
+<tr><td>SD-015</td><td>Deepak Kumar</td><td>Irregular garbage collection</td><td>08-01-2026</td><td class="pending">Pending</td><td><a class="view-btn">View</a></td></tr>
+
+<tr><td>SD-016</td><td>Rina Das</td><td>Sewage water on road</td><td>08-01-2026</td><td class="pending">Pending</td><td><a class="view-btn">View</a></td></tr>
+<tr><td>SD-017</td><td>Karan Khanna</td><td>Garbage piling near school</td><td>09-01-2026</td><td class="resolved">Resolved</td><td><a class="view-btn">View</a></td></tr>
+<tr><td>SD-018</td><td>Alka Mishra</td><td>Public toilet water issue</td><td>09-01-2026</td><td class="resolved">Resolved</td><td><a class="view-btn">View</a></td></tr>
+<tr><td>SD-019</td><td>Prakash Jain</td><td>Overflowing manhole</td><td>10-01-2026</td><td class="pending">Pending</td><td><a class="view-btn">View</a></td></tr>
+<tr><td>SD-020</td><td>Sonal Kapur</td><td>Garbage smell in market</td><td>10-01-2026</td><td class="resolved">Resolved</td><td><a class="view-btn">View</a></td></tr>
+
+<tr><td>SD-021</td><td>Ramesh Pawar</td><td>Drain cleaning not done</td><td>11-01-2026</td><td class="pending">Pending</td><td><a class="view-btn">View</a></td></tr>
+<tr><td>SD-022</td><td>Swati Kulkarni</td><td>Garbage truck noise issue</td><td>11-01-2026</td><td class="resolved">Resolved</td><td><a class="view-btn">View</a></td></tr>
+<tr><td>SD-023</td><td>Naveen Bansal</td><td>Open drain near house</td><td>12-01-2026</td><td class="pending">Pending</td><td><a class="view-btn">View</a></td></tr>
+<tr><td>SD-024</td><td>Komal Arora</td><td>Garbage not lifted for days</td><td>12-01-2026</td><td class="resolved">Resolved</td><td><a class="view-btn">View</a></td></tr>
+<tr><td>SD-025</td><td>Ashok Pillai</td><td>Drainage smell problem</td><td>13-01-2026</td><td class="pending">Pending</td><td><a class="view-btn">View</a></td></tr>
+</tbody>
+</table>
+</div>
+
+</div>
+
+ <footer id="contact">
+    <p>© 2026 Smart Civic Portal | Designed for Digital India </p>
+    <p>Email Id: Ruralgovernance@gmail.com</p>
+
+    <ul class=" logos ">
+  <li class="list">
+    <a href="#" class="links">
+      <i class="fab fa-facebook-f icon"></i>    </a>
+  </li>
+  <li class="list">
+    <a href="#"class="links"><i class="fab fa-twitter icon"></i></a>
+  </li >
+  <li class="list">
+    <a href="#"class="links"><i class="fab fa-linkedin-in icon"></i></a></li>
+  <li class="list">
+    <a href="#"class="links"><i class="fab fa-google-plus-g icon"></i></a></li>
+</ul>
+  </footer>
+
+<script>
+const searchInput = document.getElementById("searchInput");
+const statusFilter = document.getElementById("statusFilter");
+const rows = document.querySelectorAll("#complaintsTable tbody tr");
+
+function filterTable(){
+  const searchText = searchInput.value.toLowerCase();
+  const statusValue = statusFilter.value;
+
+  rows.forEach(row=>{
+    const text = row.innerText.toLowerCase();
+    const status = row.querySelector("td:nth-child(5)").innerText.toLowerCase();
+    row.style.display =
+      text.includes(searchText) &&
+      (statusValue === "all" || status === statusValue)
+      ? "" : "none";
+  });
+}
+
+searchInput.addEventListener("keyup", filterTable);
+statusFilter.addEventListener("change", filterTable);
+</script>
+
+</body>
+</html>

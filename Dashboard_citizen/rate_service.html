@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rate Service - Citizen Dashboard</title>
+  <link rel="stylesheet" href="./citizen.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Saira:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .rating-container {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .rating-container input {
+      display: none;
+    }
+    .rating-container label {
+      font-size: 40px;
+      color: #ccc;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .rating-container label:hover,
+    .rating-container label:hover ~ label,
+    .rating-container input:checked ~ label {
+      color: #fbbf24; /* Amber color */
+    }
+  </style>
+</head>
+<body>
+  
+  <nav>  
+    <div class="logo-container">
+      <img src="../assets/finallogo.png" alt="Logo" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(102,126,234,0.4);">
+      <b>Welcome, Afrah</b>
+    </div>
+    <div class="nav-toggle" onclick="toggleNav()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+    <ul id="navMenu">
+      <li><a href="./citizen.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+      <li><a href="./notification.html"><i class="fa-solid fa-bell"></i> Notifications</a></li>
+      <li><a href="./profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+      <li><a href="./home.html" style="color: #ef4444;"><i class="fa-solid fa-right-from-bracket" style="color: #ef4444;"></i> Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <h1>Rate Our Service</h1>
+    <p>Your feedback helps us improve the quality of governance.</p>
+  </div>
+
+  <div class="form-container">
+    <form id="ratingForm">
+      
+      <div style="text-align: center; margin-bottom: 30px;">
+        <h3 style="margin-bottom: 15px; color: var(--text-dark);">How satisfied are you with the resolution of your recent complaint?</h3>
+        
+        <div class="rating-container">
+          <input type="radio" id="star5" name="rating" value="5" required />
+          <label for="star5" title="5 stars"><i class="fa-solid fa-star"></i></label>
+          <input type="radio" id="star4" name="rating" value="4" />
+          <label for="star4" title="4 stars"><i class="fa-solid fa-star"></i></label>
+          <input type="radio" id="star3" name="rating" value="3" />
+          <label for="star3" title="3 stars"><i class="fa-solid fa-star"></i></label>
+          <input type="radio" id="star2" name="rating" value="2" />
+          <label for="star2" title="2 stars"><i class="fa-solid fa-star"></i></label>
+          <input type="radio" id="star1" name="rating" value="1" />
+          <label for="star1" title="1 star"><i class="fa-solid fa-star"></i></label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="complaintId">Select Complaint ID (Optional)</label>
+        <select id="complaintId">
+          <option value="">-- Choose an ID --</option>
+          <option value="1022">#COMP-1022 - Garbage dump not cleared</option>
+          <option value="1015">#COMP-1015 - Water pipeline leakage</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="feedback">Additional Comments</label>
+        <textarea id="feedback" rows="4" placeholder="Tell us what you liked or what could be improved..."></textarea>
+      </div>
+
+      <div style="text-align: center; margin-top: 30px;">
+        <button type="submit" class="btn" style="width: 100%; font-size: 1.1rem; padding: 15px;">Submit Feedback</button>
+      </div>
+    </form>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-info">
+        <h3>Rural Governance</h3>
+        <p>Empowering citizens and bridging the gap between villages and administration.</p>
+        <div class="contact-info">
+          <p><i class="fa-solid fa-envelope"></i> support@ruralgovernance.in</p>
+          <p><i class="fa-solid fa-phone"></i> +91 1800-123-4567</p>
+        </div>
+      </div>
+      <div class="footer-social">
+        <h4>Connect With Us</h4>
+        <div class="social-links">
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Rural Governance Platform | All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      document.getElementById("navMenu").classList.toggle("active");
+    }
+
+    document.getElementById('ratingForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thank you for your valuable feedback!');
+      window.location.href = './citizen.html';
+    });
+  </script>
+</body>
+</html>

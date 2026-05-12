@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notifications - Citizen Dashboard</title>
+  <link rel="stylesheet" href="./citizen.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Saira:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .notification-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .notification-item {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      box-shadow: var(--glass-shadow);
+      transition: var(--transition);
+      border-left: 5px solid var(--secondary);
+    }
+    .notification-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    }
+    .notification-icon {
+      background: rgba(16, 185, 129, 0.1);
+      color: #047857;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .notification-content h4 {
+      margin-bottom: 5px;
+      color: var(--text-dark);
+      font-size: 1.1rem;
+    }
+    .notification-content p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-bottom: 5px;
+    }
+    .notification-meta {
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 50px;
+      color: var(--text-light);
+    }
+    .empty-state i {
+      font-size: 48px;
+      margin-bottom: 15px;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  
+  <nav>  
+    <div class="logo-container">
+      <img src="../assets/finallogo.png" alt="Logo" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(102,126,234,0.4);">
+      <b>Welcome, Afrah</b>
+    </div>
+    <div class="nav-toggle" onclick="toggleNav()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+    <ul id="navMenu">
+      <li><a href="./citizen.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+      <li><a href="./notification.html" style="color: var(--primary);"><i class="fa-solid fa-bell"></i> Notifications</a></li>
+      <li><a href="./profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+      <li><a href="./home.html" style="color: #ef4444;"><i class="fa-solid fa-right-from-bracket" style="color: #ef4444;"></i> Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="main-container" style="margin-top: 40px; max-width: 800px;">
+    <div class="page-header">
+      <h1>Notifications</h1>
+      <p>Updates on your successfully completed service requests.</p>
+    </div>
+
+    <div class="notification-list" id="notificationList">
+      <!-- Dynamic notifications will be loaded here -->
+    </div>
+    
+  </div>
+
+  <footer style="margin-top: auto;">
+    <div class="footer-content">
+      <div class="footer-info">
+        <h3>Rural Governance</h3>
+        <p>Empowering citizens and bridging the gap between villages and administration.</p>
+        <div class="contact-info">
+          <p><i class="fa-solid fa-envelope"></i> support@ruralgovernance.in</p>
+          <p><i class="fa-solid fa-phone"></i> +91 1800-123-4567</p>
+        </div>
+      </div>
+      <div class="footer-social">
+        <h4>Connect With Us</h4>
+        <div class="social-links">
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Rural Governance Platform | All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      document.getElementById("navMenu").classList.toggle("active");
+    }
+
+    // Simulate backend data where only completed complaints send notifications
+    const mockComplaints = [
+      { id: '1045', title: 'Broken Streetlight near Main Road', status: 'Pending', date: '10 May 2026' },
+      { id: '1022', title: 'Garbage dump not cleared', status: 'Resolved', date: '05 May 2026', resolvedDate: '07 May 2026' },
+      { id: '1015', title: 'Water pipeline leakage', status: 'Resolved', date: '28 Apr 2026', resolvedDate: '30 Apr 2026' },
+      { id: '1008', title: 'Potholes on Village Entry Road', status: 'Pending', date: '15 Apr 2026' }
+    ];
+
+    function renderNotifications() {
+      const container = document.getElementById('notificationList');
+      const completed = mockComplaints.filter(c => c.status === 'Resolved');
+
+      if(completed.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <i class="fa-solid fa-bell-slash"></i>
+            <h3>No New Notifications</h3>
+            <p>You will receive a notification here once your pending complaints are resolved.</p>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      completed.forEach(c => {
+        html += `
+          <div class="notification-item">
+            <div class="notification-icon">
+              <i class="fa-solid fa-check-double"></i>
+            </div>
+            <div class="notification-content">
+              <h4>Complaint Resolved: #${c.id}</h4>
+              <p>Your complaint regarding "<strong>${c.title}</strong>" has been successfully completed by our team.</p>
+              <div class="notification-meta">
+                <i class="fa-regular fa-clock"></i> Resolved on ${c.resolvedDate}
+                &nbsp;|&nbsp;
+                <a href="./rate_service.html" style="color: var(--primary); text-decoration: none; font-weight: 600;">Rate Service</a>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    // Initial render
+    renderNotifications();
+
+  </script>
+</body>
+</html>

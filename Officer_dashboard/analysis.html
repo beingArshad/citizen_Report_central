@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints Analysis Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="./css/anaysis.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Saira:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="top-bar">
+        <div class="logo">
+            <img src="../assets/finallogo.png" alt="Rural Governance Logo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(102,126,234,0.4);">
+        </div>
+
+        <button class="hamburger toggle-btn" onclick="toggleNav()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+            <span class="close-nav" onclick="toggleNav()">&times;</span>
+
+            <li><a href="home.html"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="complaints.html" class="active"><i class="fa-solid fa-file-lines"></i> Complaints</a></li>
+            <li><a href="workers.html"><i class="fa-solid fa-person-digging"></i> Workers</a></li>
+            <li><a href="analysis.html"><i class="fa-solid fa-chart-column"></i>Analysis</a></li>
+            <li><a href="profile.html"><i class="fa-regular fa-address-card"></i> Profile</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <h1>Analysis & Overview</h1>
+
+        <div class="charts-grid">
+            <div class="card">
+                <h2>Monthly Complaints Trend</h2>
+                <div class="chart-container">
+                    <canvas id="monthlyComplaintsChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Resolved vs Received (Monthly)</h2>
+                <div class="chart-container">
+                    <canvas id="resolvedComplaintsChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+
+            <div class="card stat-card">
+                <div class="stat-title">
+                    Total Complaints
+                    <span class="bg-primary-light">📊</span>
+                </div>
+                <div class="stat-value">100%</div>
+                <div class="stat-desc text-primary">↑ 12% increase from last month</div>
+                <div style="margin-top: 15px; font-size: 14px; color: #6b7280;">
+                    <strong>450</strong> total complaints registered this year.
+                </div>
+            </div>
+
+            <div class="card stat-card">
+                <div class="stat-title">
+                    Resolved Ratio
+                    <span class="bg-success-light">✅</span>
+                </div>
+                <div class="stat-value">78%</div>
+                <div class="stat-desc text-success">↑ 5% improvement</div>
+
+                <div
+                    style="width: 100%; background: #e5e7eb; border-radius: 4px; height: 8px; margin-top: 15px; overflow: hidden;">
+                    <div style="width: 78%; background: #10b981; height: 100%; border-radius: 4px;"></div>
+                </div>
+            </div>
+
+            <div class="card stat-card">
+                <div class="stat-title">
+                    Rejection Ratio
+                    <span class="bg-danger-light">❌</span>
+                </div>
+                <div class="stat-value">8%</div>
+                <div class="stat-desc text-danger">↓ 2% decrease</div>
+
+                <div
+                    style="width: 100%; background: #e5e7eb; border-radius: 4px; height: 8px; margin-top: 15px; overflow: hidden;">
+                    <div style="width: 8%; background: #ef4444; height: 100%; border-radius: 4px;"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Global Chart.js defaults for a cleaner look
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.color = '#6b7280';
+        Chart.defaults.scale.grid.color = '#f3f4f6';
+
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'];
+
+        // --------------------------------------------------------
+        // CHART 1: Monthly Complaints (Smooth Line Chart)
+        // --------------------------------------------------------
+        const ctxMonthly = document.getElementById('monthlyComplaintsChart').getContext('2d');
+
+        // Create a smooth gradient for the line chart fill
+        let gradientBlue = ctxMonthly.createLinearGradient(0, 0, 0, 300);
+        gradientBlue.addColorStop(0, 'rgba(79, 70, 229, 0.4)'); // Indigo primary
+        gradientBlue.addColorStop(1, 'rgba(79, 70, 229, 0.0)');
+
+        new Chart(ctxMonthly, {
+            type: 'line',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'Total Complaints Received',
+                    data: [25, 32, 28, 45, 38, 52, 48, 60, 55, 65],
+                    borderColor: '#4f46e5',
+                    backgroundColor: gradientBlue,
+                    borderWidth: 3,
+                    tension: 0.4, // Makes the line curved/smooth
+                    fill: true,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderColor: '#4f46e5',
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }, // Hide legend for a cleaner look
+                    tooltip: {
+                        backgroundColor: '#1f2937',
+                        padding: 12,
+                        titleFont: { size: 13 },
+                        bodyFont: { size: 14, weight: 'bold' }
+                    }
+                },
+                scales: {
+                    y: { beginAtZero: true, border: { display: false } },
+                    x: { border: { display: false }, grid: { display: false } }
+                }
+            }
+        });
+
+        // --------------------------------------------------------
+        // CHART 2: Resolved vs Received (Grouped Bar Chart)
+        // --------------------------------------------------------
+        const ctxResolved = document.getElementById('resolvedComplaintsChart').getContext('2d');
+
+        new Chart(ctxResolved, {
+            type: 'bar',
+            data: {
+                labels: months.slice(4), // Showing only last 6 months for better spacing
+                datasets: [
+                    {
+                        label: 'Received',
+                        data: [38, 52, 48, 60, 55, 65],
+                        backgroundColor: '#e5e7eb', // Light gray
+                        borderRadius: 4,
+                        barPercentage: 0.6
+                    },
+                    {
+                        label: 'Resolved',
+                        data: [35, 40, 42, 50, 48, 55],
+                        backgroundColor: '#10b981', // Emerald Green
+                        borderRadius: 4,
+                        barPercentage: 0.6
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { usePointStyle: true, boxWidth: 8 }
+                    },
+                    tooltip: {
+                        backgroundColor: '#1f2937',
+                        padding: 12
+                    }
+                },
+                scales: {
+                    y: { beginAtZero: true, border: { display: false } },
+                    x: { border: { display: false }, grid: { display: false } }
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

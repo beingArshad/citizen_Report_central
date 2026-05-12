@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <style>
+
+
+
+
+/* *************ABOUT  CSS**************  */
+
+ * {
+        margin-top: 0px;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+        background: #f5f5f5;
+    }
+
+    .hero {
+        position: relative;
+        height: 60vh;
+        min-height: 380px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+        background: linear-gradient(
+            120deg,
+            #0e1c14 0%,
+            #1f3a1f 30%,
+            #4b8f1f 70%,
+            #7dbb1f 100%
+        );
+    }
+
+    /* Wind turbine silhouettes */
+    .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.15)' stroke-width='6'%3E%3Cline x1='200' y1='400' x2='200' y2='160'/%3E%3Cline x1='200' y1='160' x2='160' y2='120'/%3E%3Cline x1='200' y1='160' x2='240' y2='120'/%3E%3Cline x1='200' y1='160' x2='200' y2='100'/%3E%3Cline x1='420' y1='400' x2='420' y2='180'/%3E%3Cline x1='420' y1='180' x2='380' y2='140'/%3E%3Cline x1='420' y1='180' x2='460' y2='140'/%3E%3Cline x1='420' y1='180' x2='420' y2='120'/%3E%3C/g%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: left bottom;
+        background-size: 60%;
+        opacity: 0.6;
+    }
+
+    /* Curved line pattern on right */
+    .pattern {
+        position: absolute;
+        right: -10%;
+        top: 0;
+        width: 50%;
+        height: 100%;
+        background:
+            repeating-radial-gradient(
+                circle at left center,
+                rgba(255,255,255,0.15) 0,
+                rgba(255,255,255,0.15) 1px,
+                transparent 1px,
+                transparent 12px
+            );
+        opacity: 0.5;
+    }
+
+    .content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .content h1 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    .breadcrumb {
+        font-size: 1rem;
+        opacity: 0.9;
+    }
+
+    .breadcrumb span {
+        opacity: 0.7;
+        margin: 0 6px;
+    }
+
+    @media (max-width: 768px) {
+        .pattern {
+            display: none;
+        }
+    }
+
+  
+
+
+
+
+    
+     /* ****************PHOTOS  CSS************************ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    background: #1f2330;
+    color: #fff;
+}
+
+/* Section */
+.team-section {
+    padding: 80px 70px;
+    background: #222633;
+    position: relative;
+}
+
+/* Header */
+.team-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.team-header small {
+    color: #7CFF00;
+    font-weight: 600;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.team-header h2 {
+    font-size: 42px;
+    font-weight: 700;
+}
+
+.all-btn {
+    background: #1f8f2e;
+    color: #fff;
+    padding: 14px 26px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.all-btn span {
+    margin-left: 8px;
+}
+
+/* Team rows */
+.team-row {
+    display: grid;
+    grid-template-columns: 1.2fr 2fr 80px;
+    align-items: center;
+    padding: 35px 0;
+    border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.team-row:first-of-type {
+    border-top: none;
+}
+
+.role {
+    color: #28c840;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.name {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.desc {
+    color: #c7c7c7;
+    line-height: 1.6;
+    max-width: 480px;
+}
+
+/* Plus button */
+/* .plus-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #fff;
+    color: #28c840;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: bold;
+    cursor: pointer;
+} */
+
+.image {
+    width: 5px;
+    height: 44px;
+    border-radius: 50%;
+    background: #fff;
+    /* color: #28c840; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: bold;
+    cursor: pointer;
+    
+    }
+.img{
+    border-radius: 50px;
+    width: 70px;
+}
+
+
+/* Decorative grid lines (right side) */
+.team-section::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 35%;
+    height: 100%;
+    background:
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.3;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .team-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .team-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .plus-btn {
+        justify-self: flex-start;
+    }
+}
+
+
+ /* ===== NAVBAR (FIXED) ===== */
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  
+  width:100%;
+  height:var(--nav-height);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 40px;
+  background:white;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  z-index:3000;
+}
+
+
+
+nav ul{
+  display:flex;
+  gap:24px;
+  list-style:none;
+}
+
+nav ul li a{
+  text-decoration:none;
+  color:#000;
+  font-weight:500;
+}
+
+nav ul li a:hover{
+  color:var(--blue);
+}
+
+.login_btn{
+  padding:10px 18px;
+  border-radius:80px;
+  border:1px solid black;
+  background:transparent;
+  cursor:pointer;
+}
+
+.login_btn:hover{
+  background:var(--blue);
+}
+
+.login_anchor{
+  text-decoration:none;
+  color:black;
+}
+
+.login_btn:hover .login_anchor{
+  color:white;
+}
+
+
+    
+
+
+   </style>
+</head>
+<body>
+    
+
+
+ <nav>
+    <div class="logo"><img src="./image.png" alt="" width="100px"> </div>
+    <ul>
+      <li><a href="#"><i class="fa-regular fa-house"></i> Home</a></li>
+      <!-- <li><a href="#features"><i class="fa-solid fa-paperclip"></i> Features</a></li> -->
+      
+      <li><a href="#contact"><i class="fa-solid fa-phone"></i> Contact</a></li>
+      <li><a href="./Best one(1)/admin_dashboard/about.html"><i class="fa-solid fa-circle-exclamation"></i>About Us</a></li>
+       <li><a href=""><i class="fa-solid fa-circle-exclamation"></i>Services</a></li>
+    </ul>
+    <button class="login_btn"><a href="./Best one(1)/admin_dashboard/login.html" class="login_anchor">Login  <i class="fa-solid fa-users"></i> </a>    </button>
+  </nav>
+   
+<script>
+    function toggleDetails(){
+        let content=document.getElementById("more");
+                let btn =document.getElementById("btn");
+                if (content.style.display==="none"){
+                    content.style.display = "block";
+                    btn.innerText = "know less";
+                }else{
+                    content.style.display = "none";
+                    btn.innerText = "Know More";
+
+                }
+
+    }
+</script>
+
+
+
+
+<!-- ************ABOUT HTML********** -->
+
+<section class="hero">
+    <div class="pattern"></div>
+
+    <div class="content">
+        <h1>About Us</h1>
+        <div class="breadcrumb">
+            Home <span>›</span> About Us
+        </div>
+    </div>
+</section>
+
+<!-- ***********PHOTOS  HTML************ -->
+
+
+
+<section class="team-section">
+
+    <div class="team-header">
+        <div>
+            <small>EXPERT PEOPLE</small>
+            <h2>Dedicated Team Members</h2>
+        </div>
+        <a href="#" class="all-btn">All Member <span>→</span></a>
+    </div>
+
+    <div class="team-row">
+        <div>
+            <div class="role">Team Leader</div>
+            <div class="name">Maduri Vikram</div>
+        </div>
+        <div class="desc">
+            Integer at sapien nec sapien sollicitudin ultrices in ut nisl.
+        </div>
+        <div class="plus-btn">+</div>
+    </div>
+
+    <div class="team-row">
+        <div>
+            <div class="role">Team Member</div>
+            <div class="name">Arshad Khan</div>
+        </div>
+        <div class="desc">
+            Integer at sapien nec sapien sollicitudin ultrices in ut nisl.
+        </div>
+        <div class="plus-btn">+</div>
+    </div>
+
+    <div class="team-row">
+        <div>
+            <div class="role">Team Member</div>
+            <div class="name">Akhil Teja</div>
+        </div>
+        <div class="desc">
+            Integer at sapien nec sapien sollicitudin ultrices in ut nisl.
+        </div>
+        <div class="plus-btn">+</div>
+    </div>
+
+    <div class="team-row">
+        <div>
+            <div class="role">Team Member</div>
+            <div class="name">Chandini</div>
+        </div>
+        <div class="desc">
+            Integer at sapien nec sapien sollicitudin ultrices in ut nisl.
+        </div>
+        <div class="image"><img src="./chandini.jpeg" alt="" class="img"></div>
+    </div>
+
+</section>
+    
+</body>
+</html>

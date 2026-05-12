@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Irrigation Department Complaints</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --blue: #0a6cff;
+      --black: #0f172a;
+      --bg: #f4f6fb;
+      --green: #16a34a;
+      --red: #dc2626;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Segoe UI, Arial, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+    }
+
+    /* SIDEBAR */
+    /* .sidebar {
+      width: 240px;
+      height: 100vh;
+      background: var(--black);
+      padding: 25px;
+      position: fixed;
+    }
+
+    .sidebar a {
+      display: flex;
+      gap: 12px;
+      color: #fff;
+      text-decoration: none;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+
+    .sidebar a.active,
+    .sidebar a:hover {
+      background: var(--blue);
+    } */
+
+    /* MAIN */
+    .main {
+      /* margin-left: 260px; */
+      padding: 30px;
+    }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .back-btn {
+      background: var(--blue);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    /* CARDS */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+
+    .card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+    }
+
+    .card p {
+      font-size: 28px;
+      font-weight: bold;
+      color: var(--blue);
+    }
+
+    /* CONTROLS */
+    .controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
+
+    .controls input,
+    .controls select {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      min-width: 160px;
+    }
+
+    /* TABLE */
+    .table-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #e5e7eb;
+      white-space: nowrap;
+    }
+
+    th {
+      background: #f1f5f9;
+    }
+
+    .pending {
+      background: #fee2e2;
+      color: var(--red);
+      font-weight: 600;
+    }
+
+    .resolved {
+      background: #dcfce7;
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    .view-btn {
+      background: var(--blue);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    @media(max-width:900px) {
+      .sidebar {
+        display: none;
+      }
+
+      .main {
+        margin-left: 0;
+      }
+    }
+
+    footer {
+      background: var(--black);
+      color: white;
+      padding: 40px;
+      text-align: center;
+      margin-top: 60px;
+
+    }
+
+    footer .logos {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    footer .logos .list {
+      list-style: none;
+    }
+
+    footer .logos .links {
+      width: 60px;
+      height: 60px;
+      background-color: #fff;
+      text-align: center;
+      line-height: 60px;
+      font-size: 24px;
+      display: block;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      border: 3px solid #fff;
+      z-index: 1;
+      transition: transform 0.3s;
+    }
+
+    footer .logos .links .icon {
+      position: relative;
+      color: #262626;
+      transition: .5s;
+      z-index: 3;
+    }
+
+    footer .logos .links:hover .icon {
+      color: #fff;
+      transform: rotateY(360deg);
+    }
+
+    footer .logos .links:before {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transition: .5s;
+      z-index: 2;
+    }
+
+    footer .logos .links:hover:before {
+      top: 0;
+    }
+
+    footer .logos .list:nth-child(1) .links:before {
+      background: #3b5999;
+      /* Facebook */
+    }
+
+    footer .logos .list:nth-child(2) .links:before {
+      background: #E4405F;
+      /* Instagram */
+    }
+
+    footer .logos .list:nth-child(3) .links:before {
+      background: #55acee;
+      /* Twitter */
+    }
+
+    footer .logos .list:nth-child(4) .links:before {
+      background: #55acee;
+      /* Twitter */
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- <div class="sidebar">
+    <a href="index.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+    <a href="complaints.html"><i class="fa-solid fa-file-circle-exclamation"></i> Complaints</a>
+    <a class="active"><i class="fa-solid fa-building"></i> Departments</a>
+  </div> -->
+
+  <div class="main">
+
+    <div class="header">
+      <a href="./departmental_complaints.html" class="back-btn"><i class="fa fa-arrow-left"></i></a>
+      <h1>Irrigation Department</h1>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h4>Total Complaints</h4>
+        <p>28</p>
+      </div>
+      <div class="card">
+        <h4>Pending</h4>
+        <p>15</p>
+      </div>
+      <div class="card">
+        <h4>Resolved</h4>
+        <p>13</p>
+      </div>
+    </div>
+
+    <!-- FILTERS -->
+    <div class="controls">
+      <input type="text" id="searchInput" placeholder="Search complaints...">
+
+      <select id="statusFilter">
+        <option value="all">All Status</option>
+        <option value="pending">Pending</option>
+        <option value="resolved">Resolved</option>
+      </select>
+
+      <select id="stateFilter">
+        <option value="">All States</option>
+      </select>
+      <select id="districtFilter">
+        <option value="">All Districts</option>
+      </select>
+      <select id="mandalFilter">
+        <option value="">All Mandals</option>
+      </select>
+      <select id="villageFilter">
+        <option value="">All Villages</option>
+      </select>
+    </div>
+
+    <div class="table-container">
+      <table id="complaintsTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Citizen</th>
+            <th>State</th>
+            <th>District</th>
+            <th>Mandal</th>
+            <th>Village</th>
+            <th>Issue</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td>IRR-001</td>
+            <td>Rajesh Kumar</td>
+            <td>Telangana</td>
+            <td>Nalgonda</td>
+            <td>Miryalaguda</td>
+            <td>Thungapadu</td>
+            <td>Canal blockage</td>
+            <td>01-01-2026</td>
+            <td class="pending">Pending</td>
+            <td><a class="view-btn">View</a></td>
+          </tr>
+          <tr>
+            <td>IRR-002</td>
+            <td>Sunita Devi</td>
+            <td>Telangana</td>
+            <td>Warangal</td>
+            <td>Hanamkonda</td>
+            <td>Kazipet</td>
+            <td>Broken pump</td>
+            <td>01-01-2026</td>
+            <td class="resolved">Resolved</td>
+            <td><a class="view-btn">View</a></td>
+          </tr>
+          <tr>
+            <td>IRR-003</td>
+            <td>Vikram Singh</td>
+            <td>AP</td>
+            <td>Kurnool</td>
+            <td>Nandyal</td>
+            <td>Gadivemula</td>
+            <td>Water irregular</td>
+            <td>02-01-2026</td>
+            <td class="pending">Pending</td>
+            <td><a class="view-btn">View</a></td>
+          </tr>
+          <tr>
+            <td>IRR-028</td>
+            <td>Rekha Patel</td>
+            <td>Gujarat</td>
+            <td>Anand</td>
+            <td>Petlad</td>
+            <td>Ramod</td>
+            <td>Water monitoring issue</td>
+            <td>14-01-2026</td>
+            <td class="resolved">Resolved</td>
+            <td><a class="view-btn">View</a></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer id="contact">
+    <p>© 2026 Smart Civic Portal | Designed for Digital India </p>
+    <p>Email Id: Ruralgovernance@gmail.com</p>
+
+    <ul class=" logos ">
+      <li class="list">
+        <a href="#" class="links">
+          <i class="fab fa-facebook-f icon"></i> </a>
+      </li>
+      <li class="list">
+        <a href="#" class="links"><i class="fab fa-twitter icon"></i></a>
+      </li>
+      <li class="list">
+        <a href="#" class="links"><i class="fab fa-linkedin-in icon"></i></a>
+      </li>
+      <li class="list">
+        <a href="#" class="links"><i class="fab fa-google-plus-g icon"></i></a>
+      </li>
+    </ul>
+  </footer>
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const statusFilter = document.getElementById("statusFilter");
+    const stateFilter = document.getElementById("stateFilter");
+    const districtFilter = document.getElementById("districtFilter");
+    const mandalFilter = document.getElementById("mandalFilter");
+    const villageFilter = document.getElementById("villageFilter");
+    const rows = document.querySelectorAll("#complaintsTable tbody tr");
+
+    /* LOCATION DATA */
+    const locationData = {};
+    rows.forEach(r => {
+      const s = r.children[2].innerText;
+      const d = r.children[3].innerText;
+      const m = r.children[4].innerText;
+      const v = r.children[5].innerText;
+      locationData[s] ??= {};
+      locationData[s][d] ??= {};
+      locationData[s][d][m] ??= [];
+      if (!locationData[s][d][m].includes(v)) locationData[s][d][m].push(v);
+    });
+
+    /* Populate States */
+    Object.keys(locationData).forEach(s => stateFilter.innerHTML += `<option>${s}</option>`);
+
+    stateFilter.onchange = () => {
+      districtFilter.innerHTML = '<option value="">All Districts</option>';
+      mandalFilter.innerHTML = '<option value="">All Mandals</option>';
+      villageFilter.innerHTML = '<option value="">All Villages</option>';
+      if (stateFilter.value)
+        Object.keys(locationData[stateFilter.value]).forEach(d => districtFilter.innerHTML += `<option>${d}</option>`);
+      filterTable();
+    };
+
+    districtFilter.onchange = () => {
+      mandalFilter.innerHTML = '<option value="">All Mandals</option>';
+      villageFilter.innerHTML = '<option value="">All Villages</option>';
+      if (districtFilter.value)
+        Object.keys(locationData[stateFilter.value][districtFilter.value]).forEach(m => mandalFilter.innerHTML += `<option>${m}</option>`);
+      filterTable();
+    };
+
+    mandalFilter.onchange = () => {
+      villageFilter.innerHTML = '<option value="">All Villages</option>';
+      if (mandalFilter.value)
+        locationData[stateFilter.value][districtFilter.value][mandalFilter.value].forEach(v => villageFilter.innerHTML += `<option>${v}</option>`);
+      filterTable();
+    };
+
+    function filterTable() {
+      rows.forEach(r => {
+        const text = r.innerText.toLowerCase();
+        const status = r.children[8].innerText.toLowerCase();
+        r.style.display =
+          (!searchInput.value || text.includes(searchInput.value.toLowerCase())) &&
+            (statusFilter.value === "all" || status === statusFilter.value) &&
+            (!stateFilter.value || r.children[2].innerText === stateFilter.value) &&
+            (!districtFilter.value || r.children[3].innerText === districtFilter.value) &&
+            (!mandalFilter.value || r.children[4].innerText === mandalFilter.value) &&
+            (!villageFilter.value || r.children[5].innerText === villageFilter.value)
+            ? "" : "none";
+      });
+    }
+
+    [searchInput, statusFilter, villageFilter].forEach(e => e.addEventListener("change", filterTable));
+    searchInput.addEventListener("keyup", filterTable);
+  </script>
+
+</body>
+
+</html>

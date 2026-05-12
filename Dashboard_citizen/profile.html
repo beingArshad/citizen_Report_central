@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citizen Profile - Rural Governance</title>
+  <link rel="stylesheet" href="./citizen.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Saira:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+  <nav>  
+    <div class="logo-container">
+      <img src="../assets/finallogo.png" alt="Logo" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(102,126,234,0.4);">
+      <b>Welcome, Afrah</b>
+    </div>
+    <div class="nav-toggle" onclick="toggleNav()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+    <ul id="navMenu">
+      <li><a href="./citizen.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+      <li><a href="./notification.html"><i class="fa-solid fa-bell"></i> Notifications</a></li>
+      <li><a href="./profile.html" style="color: var(--primary);"><i class="fa-solid fa-user"></i> Profile</a></li>
+      <li><a href="./index.html" style="color: #ef4444;"><i class="fa-solid fa-right-from-bracket" style="color: #ef4444;"></i> Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header" style="margin-top: 40px;">
+    <h1>My Profile</h1>
+    <p>Manage your personal details and account settings.</p>
+  </div>
+
+  <div class="profile-container">
+    
+    <!-- Left Sidebar: Photo & Actions -->
+    <div class="profile-sidebar">
+      <img src="https://ui-avatars.com/api/?name=Afrah+Shaik&background=667eea&color=fff&size=150" alt="Profile Photo" class="profile-photo" id="profileImagePreview">
+      
+      <h3 style="margin-bottom: 5px;">Afrah</h3>
+      <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 20px;">Citizen ID: RG-84729</p>
+
+      <div class="file-upload-wrapper" style="height: 60px; margin-bottom: 15px;">
+        <input type="file" accept="image/*" id="photoUpload">
+        <div class="placeholder" style="flex-direction: row; gap: 8px;">
+          <i class="fa-solid fa-camera" style="font-size: 18px;"></i>
+          <span style="font-size: 0.9rem;">Change Photo</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Main Area: Details -->
+    <div class="profile-main">
+      <div class="profile-header">
+        <h2>Personal Details</h2>
+        <a href="./home.html" class="btn btn-outline" style="color: #ef4444; border-color: #ef4444;"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a>
+      </div>
+
+      <div class="profile-details">
+        <div class="detail-group">
+          <label>Full Name</label>
+          <p>Afrah Shaik</p>
+        </div>
+        <div class="detail-group">
+          <label>Date of Birth</label>
+          <p>14 August 1995</p>
+        </div>
+        <div class="detail-group">
+          <label>Aadhar Number</label>
+          <p>XXXX-XXXX-1234</p>
+        </div>
+        <div class="detail-group">
+          <label>Phone Number</label>
+          <p>+91 98765 43210</p>
+        </div>
+        <div class="detail-group" style="grid-column: 1 / -1;">
+          <label>Residential Address</label>
+          <p>H.No 4-21, Main Street, Village Panchayat Office Road</p>
+        </div>
+        <div class="detail-group">
+          <label>Village / City</label>
+          <p>Rampur</p>
+        </div>
+        <div class="detail-group">
+          <label>State</label>
+          <p>Telangana</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 40px; text-align: right; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 20px;">
+        <button class="btn" onclick="requestChange()"><i class="fa-solid fa-pen-to-square"></i> Request Profile Change</button>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-info">
+        <h3>Rural Governance</h3>
+        <p>Empowering citizens and bridging the gap between villages and administration.</p>
+        <div class="contact-info">
+          <p><i class="fa-solid fa-envelope"></i> support@ruralgovernance.in</p>
+          <p><i class="fa-solid fa-phone"></i> +91 1800-123-4567</p>
+        </div>
+      </div>
+      <div class="footer-social">
+        <h4>Connect With Us</h4>
+        <div class="social-links">
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Rural Governance Platform | All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      document.getElementById("navMenu").classList.toggle("active");
+    }
+
+    // Handle photo upload preview
+    document.getElementById('photoUpload').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          document.getElementById('profileImagePreview').src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function requestChange() {
+      alert("A request has been sent to the Panchayat Admin to unlock profile editing. You will be notified once approved.");
+    }
+  </script>
+</body>
+</html>

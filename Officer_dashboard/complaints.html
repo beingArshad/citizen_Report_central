@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Village Complaints Management</title>
+    <link rel="stylesheet" href="./css/complaints.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Saira:wght@100..900&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="top-bar">
+        <div class="logo">
+            <img src="../assets/finallogo.png" alt="Rural Governance Logo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(102,126,234,0.4);">
+        </div>
+        <button class="hamburger toggle-btn" onclick="toggleNav()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+            <span class="close-nav" onclick="toggleNav()">&times;</span>
+
+            <li><a href="home.html"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="complaints.html" class="active"><i class="fa-solid fa-file-lines"></i> Complaints</a></li>
+            <li><a href="workers.html"><i class="fa-solid fa-person-digging"></i> Workers</a></li>
+            <li><a href="analysis.html"><i class="fa-solid fa-chart-column"></i>Analysis</a></li>
+            <li><a href="profile.html"><i class="fa-regular fa-address-card"></i> Profile</a></li>
+        </ul>
+    </div>
+    <div class="container">
+
+        <div id="dashboard-view" class="page-view active">
+            <h1>Village Complaints Management</h1>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('new')">New <span class="badge-count"
+                        id="count-new">0</span></button>
+                <button class="tab-btn" onclick="switchTab('ongoing')">Ongoing <span class="badge-count"
+                        id="count-ongoing">0</span></button>
+                <button class="tab-btn" onclick="switchTab('rejected')">Rejected <span class="badge-count"
+                        id="count-rejected">0</span></button>
+            </div>
+
+            <div class="card" style="padding: 0;">
+                <div
+                    style="padding: 20px 30px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center;">
+                    <h2 style="margin: 0; border: none; padding: 0;" id="table-title">New Complaints</h2>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead id="table-head">
+                        </thead>
+                        <tbody id="complaints-tbody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="new-details-view" class="page-view">
+            <button class="btn btn-outline" style="margin-bottom: 20px;" onclick="openPage('dashboard-view')">← Back to
+                Dashboard</button>
+
+            <div class="card">
+                <h2>Complaint Details</h2>
+
+                <div class="info-grid">
+                    <div class="info-item"><span class="info-label">Complaint ID</span><span class="info-value"
+                            id="detail-id"></span></div>
+                    <div class="info-item"><span class="info-label">Villager Name</span><span class="info-value"
+                            id="detail-villager"></span></div>
+                    <div class="info-item"><span class="info-label">Category</span><span class="info-value"
+                            id="detail-category"></span></div>
+                    <div class="info-item"><span class="info-label">Location</span><span class="info-value"
+                            id="detail-location"></span></div>
+                    <div class="info-item"><span class="info-label">Reported On</span><span class="info-value"
+                            id="detail-assigned"></span></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Problem Description (from Villager)</label>
+                    <div style="background: #f9fafb; padding: 15px; border-radius: 8px; border: 1px solid #e5e7eb; color: #4b5563; min-height: 80px;"
+                        id="detail-desc"></div>
+                </div>
+
+                <div class="feedback-section">
+                    <h3>Feedback for Officer</h3>
+                    <div class="feedback-grid">
+                        <div class="feedback-col" style="flex: 2;">
+                            <textarea id="officer-notes" class="form-control"
+                                placeholder="Enter notes, observations, or feedback here..."></textarea>
+                        </div>
+                        <div class="feedback-col">
+                            <label class="file-upload" onclick="document.getElementById('upload-photo').click()">
+                                <span style="font-size: 24px; margin-bottom: 5px;">📷</span>
+                                Click to upload photo
+                                <input type="file" id="upload-photo" accept="image/*">
+                            </label>
+                        </div>
+                        <div class="feedback-actions">
+                            <button class="btn btn-success" style="height: 100%;"
+                                onclick="processComplaint('accept')">Accept (Move to Progress)</button>
+                            <button class="btn btn-danger" style="height: 100%;"
+                                onclick="processComplaint('reject')">Reject Complaint</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="ongoing-details-view" class="page-view">
+            <button class="btn btn-outline" style="margin-bottom: 20px;" onclick="openPage('dashboard-view')">← Back to
+                Dashboard</button>
+
+            <div class="card">
+                <h2>Ongoing Progress Details</h2>
+
+                <div class="info-grid">
+                    <div class="info-item"><span class="info-label">Complaint ID</span><span class="info-value"
+                            id="ongoing-id"></span></div>
+                    <div class="info-item"><span class="info-label">Title</span><span class="info-value"
+                            id="ongoing-title-text"></span></div>
+                    <div class="info-item"><span class="info-label">Approved On</span><span class="info-value"
+                            id="ongoing-approved"></span></div>
+                </div>
+
+                <div style="max-width: 600px; margin-top: 20px;">
+                    <div class="form-group">
+                        <label class="form-label">Progress / Phase</label>
+                        <select class="form-control" id="ongoing-phase">
+                            <option value="25%">25% - Initial Assessment</option>
+                            <option value="50%">50% - Work in Progress</option>
+                            <option value="75%">75% - Final Touches</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Update Description</label>
+                        <textarea class="form-control" id="ongoing-desc" rows="4"
+                            placeholder="Describe the current progress of the work..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Assign To Worker</label>
+                        <select class="form-control" id="ongoing-worker">
+                            <option value="">-- Select Worker --</option>
+                            <option value="Suresh (Mason)">Suresh (Mason)</option>
+                            <option value="Mahesh (Electrician)">Mahesh (Electrician)</option>
+                            <option value="Raju (Plumber)">Raju (Plumber)</option>
+                            <option value="Ravi (Sanitation)">Ravi (Sanitation)</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 20px;">
+                        <button class="btn btn-primary" onclick="submitProgress()">Submit Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- 1. DATA STORE (Expanded Database) ---
+        let complaints = [
+            // NEW COMPLAINTS
+            { id: 'CMP-101', title: 'Main street light not working', category: 'Electricity', location: 'Ward 3, Main Road', assignedOn: '2023-10-24', status: 'new', desc: 'The street light has been out for three days. It is very dark and unsafe for pedestrians at night.', villager: 'Vikram' },
+            { id: 'CMP-102', title: 'Drinking water pipe leakage', category: 'Water Supply', location: 'Ward 1, Near School', assignedOn: '2023-10-25', status: 'new', desc: 'Massive leakage near the primary school. Water is flooding the street and being wasted.', villager: 'Chandini' },
+            { id: 'CMP-103', title: 'Garbage not collected', category: 'Sanitation', location: 'Ward 4, Market area', assignedOn: '2023-10-26', status: 'new', desc: 'Bins are overflowing. Smell is unbearable and it is attracting stray dogs.', villager: 'Akhil teja' },
+            { id: 'CMP-104', title: 'Broken drainage slab', category: 'Infrastructure', location: 'Ward 2, Temple Street', assignedOn: '2023-10-26', status: 'new', desc: 'The concrete slab covering the main drain has collapsed. It is a hazard for two-wheelers.', villager: 'Arshad' },
+            { id: 'CMP-105', title: 'Low voltage in evening', category: 'Electricity', location: 'Ward 5, East Colony', assignedOn: '2023-10-27', status: 'new', desc: 'Voltage drops significantly after 6 PM. Tube lights are flickering and appliances are not working.', villager: 'Srinivas Rao' },
+            { id: 'CMP-106', title: 'Stray animal menace', category: 'Public Nuisance', location: 'Ward 6, Bus Stand', assignedOn: '2023-10-27', status: 'new', desc: 'Pigs and stray dogs are tearing open garbage bags and blocking the main bus stand area.', villager: 'Lakshmi' },
+            { id: 'CMP-107', title: 'Hand pump water is muddy', category: 'Water Supply', location: 'Ward 3, North Block', assignedOn: '2023-10-28', status: 'new', desc: 'The public borewell is pumping brownish water since yesterday morning. Not fit for drinking.', villager: 'Ramesh' },
+            { id: 'CMP-108', title: 'Potholes on connecting road', category: 'Infrastructure', location: 'Ward 1, Highway Link', assignedOn: '2023-10-28', status: 'new', desc: 'Recent rains have washed away the patch work. Deep potholes are causing daily accidents.', villager: 'Vikram' },
+            { id: 'CMP-109', title: 'Pension distribution delayed', category: 'Administration', location: 'Panchayat Office', assignedOn: '2023-10-29', status: 'new', desc: 'Elderly citizens have been waiting for two days, but the distribution officer has not arrived.', villager: 'Venkatesh' },
+            { id: 'CMP-110', title: 'Clogged public toilet', category: 'Sanitation', location: 'Ward 2, Market Area', assignedOn: '2023-10-29', status: 'new', desc: 'The public toilet complex is clogged and unusable. Needs immediate cleaning and maintenance.', villager: 'Arshad' },
+
+            // ONGOING COMPLAINTS
+            { id: 'CMP-091', title: 'Road repair near panchayat', category: 'Infrastructure', location: 'Center Village', approvedOn: '2023-10-22', phase: '50%', status: 'ongoing', worker: 'Suresh (Mason)', updateDesc: 'Materials arrived, leveling in progress.', villager: 'Admin' },
+            { id: 'CMP-092', title: 'Transformer replacement', category: 'Electricity', location: 'Ward 4, South', approvedOn: '2023-10-23', phase: '75%', status: 'ongoing', worker: 'Mahesh (Electrician)', updateDesc: 'New transformer mounted, waiting for main line connection.', villager: 'Chandini' },
+            { id: 'CMP-093', title: 'Clearing blocked main drain', category: 'Sanitation', location: 'Ward 1, Market', approvedOn: '2023-10-24', phase: '25%', status: 'ongoing', worker: 'Ravi (Sanitation)', updateDesc: 'Initial inspection done, JCB required to remove heavy silt.', villager: 'Gopi' },
+            { id: 'CMP-094', title: 'School roof repair', category: 'Infrastructure', location: 'Ward 2, Primary School', approvedOn: '2023-10-25', phase: '50%', status: 'ongoing', worker: 'Suresh (Mason)', updateDesc: 'Damaged tiles removed, waterproofing chemical being applied.', villager: 'Headmaster' },
+            { id: 'CMP-095', title: 'New water pipeline laying', category: 'Water Supply', location: 'Ward 6, New Colony', approvedOn: '2023-10-20', phase: '75%', status: 'ongoing', worker: 'Raju (Plumber)', updateDesc: 'Pipes laid, testing for pressure leaks before closing the trench.', villager: 'Akhil teja' },
+            { id: 'CMP-096', title: 'Fallen tree removal', category: 'Public Safety', location: 'Ward 3, Temple Road', approvedOn: '2023-10-28', phase: '25%', status: 'ongoing', worker: 'Ravi (Sanitation)', updateDesc: 'Branches cut, main trunk needs to be chopped and transported.', villager: 'Priest' },
+
+            // REJECTED COMPLAINTS
+            { id: 'CMP-081', title: 'Construct private compound wall', category: 'Personal Request', location: 'Ward 5', assignedOn: '2023-10-15', status: 'rejected', desc: 'Needs help building a wall around house.', villager: 'Kiran' },
+            { id: 'CMP-082', title: 'Dispute over farm boundary', category: 'Legal Dispute', location: 'Village Outskirts', assignedOn: '2023-10-18', status: 'rejected', desc: 'Neighbor shifted the fence by 2 feet.', villager: 'Ramu' },
+            { id: 'CMP-083', title: 'Request for free tractor usage', category: 'Equipment', location: 'Ward 4', assignedOn: '2023-10-19', status: 'rejected', desc: 'Wants the panchayat tractor for private field plowing.', villager: 'Prasad' },
+            { id: 'CMP-084', title: 'Internet speed is slow', category: 'Telecom', location: 'Entire Village', assignedOn: '2023-10-21', status: 'rejected', desc: 'Mobile network data is very slow during evenings.', villager: 'Naveen' },
+            { id: 'CMP-085', title: 'Personal electricity bill is high', category: 'Electricity', location: 'Ward 2', assignedOn: '2023-10-22', status: 'rejected', desc: 'Got a bill of 2000 rupees, refusing to pay.', villager: 'Sunitha' }
+        ];
+
+        let currentTab = 'new';
+        let activeComplaintId = null;
+
+        // Helper: Format Dates
+        function formatDate(dateString) {
+            if (!dateString) return 'N/A';
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString(undefined, options);
+        }
+
+        // Helper: Get today's date
+        function getToday() {
+            return new Date().toISOString().split('T')[0];
+        }
+
+        // --- 2. RENDER TABLE ---
+        function renderTable() {
+            const thead = document.getElementById('table-head');
+            const tbody = document.getElementById('complaints-tbody');
+            tbody.innerHTML = '';
+
+            document.getElementById('count-new').innerText = complaints.filter(c => c.status === 'new').length;
+            document.getElementById('count-ongoing').innerText = complaints.filter(c => c.status === 'ongoing').length;
+            document.getElementById('count-rejected').innerText = complaints.filter(c => c.status === 'rejected').length;
+
+            const filtered = complaints.filter(c => c.status === currentTab);
+
+            // Render Headers dynamically
+            if (currentTab === 'new') {
+                thead.innerHTML = `<tr><th>ID</th><th>Title</th><th>Category</th><th>Location</th><th>Reported By</th><th>Assigned On</th><th>Action</th></tr>`;
+            } else if (currentTab === 'ongoing') {
+                thead.innerHTML = `<tr><th>ID</th><th>Title</th><th>Approved On</th><th>Update Phase</th><th>Action</th></tr>`;
+            } else {
+                thead.innerHTML = `<tr><th>ID</th><th>Title</th><th>Category</th><th>Reported By</th><th>Status</th></tr>`;
+            }
+
+            // Handle Empty State
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding: 40px; color:#6b7280;">No ${currentTab} complaints found.</td></tr>`;
+                return;
+            }
+
+            // Generate Rows
+            filtered.forEach(c => {
+                let rowHTML = `<tr><td><strong>${c.id}</strong></td><td style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${c.title}</td>`;
+
+                if (currentTab === 'new') {
+                    rowHTML += `
+                    <td>${c.category}</td>
+                    <td>${c.location}</td>
+                    <td>${c.villager || 'Unknown'}</td>
+                    <td>${formatDate(c.assignedOn)}</td>
+                    <td><button class="btn btn-primary" onclick="viewNewDetails('${c.id}')">View</button></td>
+                `;
+                } else if (currentTab === 'ongoing') {
+                    let selectHTML = `
+                    <select class="form-control" style="padding: 6px; width: auto; font-size: 13px;" onchange="updatePhaseInline('${c.id}', this.value)">
+                        <option value="25%" ${c.phase === '25%' ? 'selected' : ''}>25%</option>
+                        <option value="50%" ${c.phase === '50%' ? 'selected' : ''}>50%</option>
+                        <option value="75%" ${c.phase === '75%' ? 'selected' : ''}>75%</option>
+                    </select>
+                `;
+                    rowHTML += `
+                    <td>${formatDate(c.approvedOn)}</td>
+                    <td>${selectHTML}</td>
+                    <td><button class="btn btn-primary" onclick="viewOngoingDetails('${c.id}')">View</button></td>
+                `;
+                } else {
+                    rowHTML += `
+                    <td>${c.category}</td>
+                    <td>${c.villager || 'Unknown'}</td>
+                    <td><span class="badge bg-rejected">REJECTED</span></td>
+                `;
+                }
+
+                rowHTML += `</tr>`;
+                tbody.innerHTML += rowHTML;
+            });
+        }
+
+        // --- 3. NAVIGATION & LOGIC ---
+        function switchTab(tabName) {
+            currentTab = tabName;
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.getElementById('table-title').innerText = tabName.charAt(0).toUpperCase() + tabName.slice(1) + " Complaints";
+            renderTable();
+        }
+
+        function openPage(pageId) {
+            document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0); // Scroll to top when opening a detail view
+            if (pageId === 'dashboard-view') renderTable();
+        }
+
+        // --- 4. DETAILS PAGES ---
+        function viewNewDetails(id) {
+            activeComplaintId = id;
+            const complaint = complaints.find(c => c.id === id);
+
+            document.getElementById('detail-id').innerText = complaint.id;
+            document.getElementById('detail-villager').innerText = complaint.villager || 'Unknown';
+            document.getElementById('detail-category').innerText = complaint.category;
+            document.getElementById('detail-location').innerText = complaint.location;
+            document.getElementById('detail-assigned').innerText = formatDate(complaint.assignedOn);
+            document.getElementById('detail-desc').innerText = complaint.desc || "No description provided.";
+
+            document.getElementById('officer-notes').value = "";
+            document.getElementById('upload-photo').value = "";
+
+            openPage('new-details-view');
+        }
+
+        function viewOngoingDetails(id) {
+            activeComplaintId = id;
+            const complaint = complaints.find(c => c.id === id);
+
+            document.getElementById('ongoing-id').innerText = complaint.id;
+            document.getElementById('ongoing-title-text').innerText = complaint.title;
+            document.getElementById('ongoing-approved').innerText = formatDate(complaint.approvedOn);
+
+            document.getElementById('ongoing-phase').value = complaint.phase || '25%';
+            document.getElementById('ongoing-worker').value = complaint.worker || '';
+            document.getElementById('ongoing-desc').value = complaint.updateDesc || '';
+
+            openPage('ongoing-details-view');
+        }
+
+        // --- 5. ACTIONS ---
+        function processComplaint(actionType) {
+            const index = complaints.findIndex(c => c.id === activeComplaintId);
+
+            if (actionType === 'accept') {
+                complaints[index].status = 'ongoing';
+                complaints[index].approvedOn = getToday();
+                complaints[index].phase = '25%';
+                complaints[index].officerNotes = document.getElementById('officer-notes').value;
+                alert(`Complaint ${activeComplaintId} accepted and moved to In Progress!`);
+            } else {
+                if (confirm("Are you sure you want to reject this complaint?")) {
+                    complaints[index].status = 'rejected';
+                    complaints[index].officerNotes = document.getElementById('officer-notes').value;
+                    alert(`Complaint ${activeComplaintId} has been rejected.`);
+                } else {
+                    return; // Cancel rejection
+                }
+            }
+
+            openPage('dashboard-view');
+        }
+
+        function submitProgress() {
+            const index = complaints.findIndex(c => c.id === activeComplaintId);
+            complaints[index].phase = document.getElementById('ongoing-phase').value;
+            complaints[index].updateDesc = document.getElementById('ongoing-desc').value;
+            complaints[index].worker = document.getElementById('ongoing-worker').value;
+
+            alert(`Details for ${activeComplaintId} updated successfully!`);
+            openPage('dashboard-view');
+        }
+
+        function updatePhaseInline(id, newPhase) {
+            const index = complaints.findIndex(c => c.id === id);
+            complaints[index].phase = newPhase;
+        }
+
+        // Initialize
+        renderTable();
+
+        fetch
+        let Complaints = [];
+        let CurrentTab = 'new';
+        let ActiveComplaintId = null;
+
+        // Fetch complaints from Python when the page loads
+        async function loadComplaints() {
+            try {
+                const response = await fetch('/api/complaints');
+                complaints = await response.json();
+                renderTable(); // Draw the table once we have the data
+            } catch (error) {
+                console.error("Error loading complaints:", error);
+            }
+        }
+
+        // Call this at the very bottom of your script instead of renderTable()
+        loadComplaints();
+
+        async function processComplaint(actionType) {
+            const notes = document.getElementById('officer-notes').value;
+            const newStatus = actionType === 'accept' ? 'ongoing' : 'rejected';
+
+            // 1. Tell Python to update the database
+            await fetch(`/api/complaints/${activeComplaintId}/status`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    status: newStatus,
+                    officerNotes: notes
+                })
+            });
+
+            // 2. Alert the user
+            if (actionType === 'accept') {
+                alert(`Complaint ${activeComplaintId} accepted and moved to In Progress!`);
+            } else {
+                alert(`Complaint ${activeComplaintId} has been rejected.`);
+            }
+
+            // 3. Reload the fresh data from the database and go back to dashboard
+            await loadComplaints();
+            openPage('dashboard-view');
+        }
+
+        async function submitProgress() {
+            const phase = document.getElementById('ongoing-phase').value;
+            const updateDesc = document.getElementById('ongoing-desc').value;
+            const worker = document.getElementById('ongoing-worker').value;
+
+            // Send the update to Python
+            await fetch(`/api/complaints/${activeComplaintId}/progress`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    phase: phase,
+                    updateDesc: updateDesc,
+                    worker: worker
+                })
+            });
+
+            alert(`Details for ${activeComplaintId} updated successfully!`);
+
+            // Reload fresh data and return to dashboard
+            await loadComplaints();
+            openPage('dashboard-view');
+        }
+    </script>
+
+</body>
+
+</html>

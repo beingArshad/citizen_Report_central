@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Complaints</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --blue: #0a6cff;
+      --black: #0f172a;
+      --white: #fff;
+      --light-gray: #f4f6fb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family:
+        Segoe UI,
+        Arial,
+        sans-serif;
+    }
+
+    body {
+      background: var(--light-gray);
+    }
+
+    .sidebar {
+      width: 240px;
+      height: 100vh;
+      background: var(--black);
+      color: white;
+      padding: 25px 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      transition: 0.3s ease;
+      z-index: 1000;
+    margin-top: 70px;
+      
+    }
+
+    .sidebar-close {
+      display: none;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 20px;
+      cursor: pointer;
+      color: white;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 6px 10px;
+      border-radius: 6px;
+      
+    }
+
+    .sidebar .logo {
+      text-align: center;
+      margin-bottom: 30px;
+
+    }
+
+    .sidebar .logo img {
+      width: 80px;
+    }
+
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+      text-decoration: none;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      transition: 0.3s;
+    }
+
+    .sidebar a i {
+      width: 20px;
+      text-align: center;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: var(--blue);
+      transform: translateX(6px);
+    }
+
+    /* .sidebar {
+        width: 240px;
+        height: 100vh;
+        background: var(--black);
+        padding: 25px 20px;
+        position: fixed;
+      } */
+    /* .sidebar .logo img{
+  width:80px;
+  text-align: center;
+}
+
+      .sidebar a {
+        display: flex;
+        gap: 12px;
+        padding: 12px;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        margin-bottom: 12px;
+        transition: 0.3s;
+      }
+      .sidebar a.active,
+      .sidebar a:hover {
+        background: var(--blue);
+        transform: translateX(6px);
+      } */
+    .main {
+      margin-left: 260px;
+      margin-top: 50px;
+      padding: 35px;
+    }
+
+    .back-btn {
+      background: var(--blue);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      border-left: 5px solid var(--blue);
+    }
+
+    .card b {
+      display: block;
+      margin-top: 10px;
+      font-size: 2rem;
+    }
+
+    .filters {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .filters input,
+    .filters select {
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      min-width: 170px;
+    }
+
+    .table-container {
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 14px;
+    }
+
+    th {
+      background: #f1f5ff;
+    }
+
+    tr:not(:last-child) {
+      border-bottom: 1px solid #eee;
+    }
+
+    .status {
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .status-hidden {
+      display: none;
+    }
+
+    .pending {
+      background: #ffe1e1;
+      color: #c70000;
+    }
+
+    .inprogress {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .resolved {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .assign-btn,
+    .view-btn {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .assign-btn {
+      background: #0a6cff;
+      color: white;
+    }
+
+    .view-btn {
+      background: #00c49f;
+      color: white;
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    .modal select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+
+    .modal-buttons {
+      text-align: right;
+    }
+
+    .modal-buttons button {
+      margin-left: 10px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: none;
+    }
+
+    .confirm-btn {
+      background: #0a6cff;
+      color: white;
+    }
+
+    .sidebar img {
+      width: 100px;
+    }
+
+    footer {
+      background: var(--black);
+      color: white;
+      padding: 40px;
+      text-align: center;
+      margin-top: 60px;
+
+    }
+
+    footer .logos {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    footer .logos .list {
+      list-style: none;
+    }
+
+    footer .logos .links {
+      width: 60px;
+      height: 60px;
+      background-color: #fff;
+      text-align: center;
+      line-height: 60px;
+      font-size: 24px;
+      display: block;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      border: 3px solid #fff;
+      z-index: 1;
+      transition: transform 0.3s;
+    }
+
+    footer .logos .links .icon {
+      position: relative;
+      color: #262626;
+      transition: .5s;
+      z-index: 3;
+    }
+
+    footer .logos .links:hover .icon {
+      color: #fff;
+      transform: rotateY(360deg);
+    }
+
+    footer .logos .links:before {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transition: .5s;
+      z-index: 2;
+    }
+
+    footer .logos .links:hover:before {
+      top: 0;
+    }
+
+    footer .logos .list:nth-child(1) .links:before {
+      background: #3b5999;
+      /* Facebook */
+    }
+
+    footer .logos .list:nth-child(2) .links:before {
+      background: #E4405F;
+      /* Instagram */
+    }
+
+    footer .logos .list:nth-child(3) .links:before {
+      background: #55acee;
+      /* Twitter */
+    }
+
+    footer .logos .list:nth-child(4) .links:before {
+      background: #55acee;
+      /* Twitter */
+    }
+
+
+    .dashboard-links a {
+      text-decoration: none;
+      color: black;
+    }
+    nav{
+  position:fixed;
+  top:0;
+  left:0;
+  
+  width:100%;
+  height:var(--nav-height);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 40px;
+  background:white;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  z-index:3000;
+}
+
+
+
+nav ul{
+  display:flex;
+  gap:24px;
+  list-style:none;
+}
+
+nav ul li a{
+  text-decoration:none;
+  color:#000;
+  font-weight:500;
+}
+
+nav ul li a:hover{
+  color:var(--blue);
+}
+
+.login_btn{
+  padding:10px 18px;
+  border-radius:80px;
+  border:1px solid black;
+  background:transparent;
+  cursor:pointer;
+}
+
+.login_btn:hover{
+  background:var(--blue);
+}
+
+.login_anchor{
+  text-decoration:none;
+  color:black;
+}
+
+.login_btn:hover .login_anchor{
+  color:white;
+}
+#menu-toggle{
+  display:none;
+}
+
+.menu-btn{
+  display:none;
+  font-size:22px;
+  background:#fff;
+  padding:8px 12px;
+  border-radius:6px;
+  cursor:pointer;
+  margin-bottom:10px;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+
+  
+  .sidebar{
+    left:-100%;
+  }
+
+  #menu-toggle:checked ~ .sidebar{
+    left:0;
+  }
+
+  #menu-toggle:checked ~ .main{
+    transform: translateX(240px);
+  }
+
+  .main{
+    margin-left:0;
+    padding:20px;
+    transition: transform 0.3s ease;
+  }
+}
+
+/* NAVBAR RESPONSIVE */
+@media(max-width:900px){
+
+  nav{
+    padding:0 20px;
+  }
+
+  nav ul{
+    display:none;
+  }
+
+  nav .logo img{
+    width:90px;
+  }
+
+  .login_btn{
+    padding:6px 14px;
+    font-size:14px;
+  }
+}
+
+/* MOBILE TOGGLE AFTER NAVBAR */
+.mobile-toggle{
+  position:fixed;
+  top:75px;          /* just below navbar */
+  left:15px;
+  z-index:2500;
+}
+
+/* base
+
+/* MOBILE */
+@media(max-width:900px){
+  .menu-btn{
+    display:block;
+  }
+}
+@media(max-width:900px){
+  .sidebar{
+    left:-100%;
+  }
+
+  #menu-toggle:checked ~ .sidebar{
+    left:0;
+  }
+
+  #menu-toggle:checked ~ .main{
+    transform:translateX(240px);
+  }
+}
+
+  </style>
+</head>
+
+<body>
+  <!-- NAVBAR -->
+<nav>
+
+
+
+  <div class="logo">
+    <img src="../assets/finallogo.png" alt="Rural Governance Logo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(10,108,255,0.4);">
+  </div>
+  <ul>
+    <li><a href="/home.html"><i class="fa-regular fa-house"></i> Home</a></li>
+    <li><a href=""><i class="fa-solid fa-phone"></i> Contact</a></li>
+    <li><a href="#"><i class="fa-solid fa-circle-exclamation"></i> About</a></li>
+    <li><hr style="border:0.5px solid #444;margin:15px 0;"></li>
+  </ul>
+  <button class="login_btn">
+    <a href="/home.html" class="login_anchor">
+      Log out 👤
+    </a>
+  </button>
+</nav>
+<!-- MOBILE TOGGLE BUTTON -->
+<label for="menu-toggle" class="menu-btn mobile-toggle">☰</label>
+
+<input type="checkbox" id="menu-toggle">
+  <div class="sidebar">
+    <!-- <div class="logo">
+      <img src="/assets/logo.avif" alt="Logo">
+    </div> -->
+    
+
+   <a href="./admin_dashboard.html"><i class="fa-solid fa-building"></i> Dashboard</a>
+    <a class="active" href="#"><i class="fa-solid fa-file-circle-exclamation"></i> Complaints</a>
+    <a href="./departmental_complaints.html"><i class="fa-solid fa-building"></i> Departments</a>
+    <!-- <a href="./analytics.html"><i class="fa-solid fa-chart-pie"></i> Analytics</a> -->
+    <a href="./system.html"><i class="fa-solid fa-gear"></i> System</a>
+    <a href="./officers_list.html"><i class="fa-solid fa-user"></i> Officers</a>
+  </div>
+
+  <div class="main">
+    <label for="menu-toggle" class="menu-btn">☰</label>
+    
+    <h1 style="margin: 15px 0">Pending Complaints</h1>
+
+    <div class="filters">
+      <input id="searchInput" type="text" placeholder="Search complaints..." />
+      <select id="deptFilter">
+        <option value="">All Departments</option>
+        <option>Water</option>
+        <option>Road</option>
+        <option>Health</option>
+        <option>Electricity</option>
+        <option>Sanitation</option>
+        <option>Transport</option>
+        <option>Irrigation</option>
+        <option>Education</option>
+      </select>
+    </div>
+
+    <div class="table-container">
+      <table id="complaintTable">
+        <thead>
+          <tr>
+            <th>Complaint ID</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Date and Time</th>
+            <th>Location</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- ORIGINAL + 30 NEW COMPLAINTS -->
+          <tr>
+            <td>#CMP1023</td>
+            <td>Water Leakage</td>
+            <td>Water</td>
+            <td>23-03-2026 09:30 AM</td>
+            <td>Main Street, Ward 5</td>
+            <td><a href="pending_complaint_details.html" class="view-btn">View</a></td>
+            <td class="status-hidden">Pending</td>
+          </tr>
+          <tr>
+            <td>#CMP1024</td>
+            <td>Street Light Failure</td>
+            <td>Electricity</td>
+            <td>22-03-2026 02:15 PM</td>
+            <td>Market Road, Ward 3</td>
+            <td><a href="pending_complaint_details.html" class="view-btn">View</a></td>
+            <td class="status-hidden">In Progress</td>
+          </tr>
+          <tr>
+            <td>#CMP1025</td>
+            <td>Garbage Overflow</td>
+            <td>Health</td>
+            <td>21-03-2026 11:45 AM</td>
+            <td>Community Center, Ward 2</td>
+            <td><a href="pending_complaint_details.html" class="view-btn">View</a></td>
+            <td class="status-hidden">Resolved</td>
+          </tr>
+
+          <!-- CMP1026 – CMP1055 -->
+          <script>
+            for (let i = 1026; i <= 1055; i++) {
+              const categories = ["Water", "Road", "Health", "Electricity"];
+              const category = categories[i % 4];
+              const hour = (9 + (i % 12)).toString().padStart(2, '0');
+              const minute = ((i % 60) * 5).toString().padStart(2, '0');
+              const period = i % 2 === 0 ? "AM" : "PM";
+              const locations = ["Main Street", "Market Road", "Community Center", "Hospital Lane", "School Road"];
+              const location = locations[i % 5];
+              const ward = (i % 10) + 1;
+              const statuses = ["Pending", "Approved", "In Progress", "Resolved"];
+              const status = statuses[i % 4];
+              document.write(`
+<tr>
+<td>#CMP${i}</td>
+<td>Public Issue ${i}</td>
+<td>${category}</td>
+<td>23-03-2026 ${hour}:${minute} ${period}</td>
+<td>${location}, Ward ${ward}</td>
+<td><a href="complaint.html" class="view-btn">View</a></td>
+<td class="status-hidden">${status}</td>
+</tr>
+`);
+            }
+          </script>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="assignModal">
+    <div class="modal">
+      <h3>Assign Officer</h3>
+      <select id="officerSelect">
+        <option>Ravi Kumar</option>
+        <option>Sita Devi</option>
+        <option>Rahul Sharma</option>
+      </select>
+      <div class="modal-buttons">
+        <button onclick="assignModal.style.display = 'none'">Cancel</button>
+        <button class="confirm-btn" onclick="assignModal.style.display = 'none'">
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <footer id="contact">
+    <p>© 2026 Smart Civic Portal | Designed for Digital India </p>
+    <p>Email Id: Ruralgovernance@gmail.com</p>
+
+    <ul class=" logos ">
+      <li class="list">
+        <a href="#" class="links">
+          <i class="fab fa-facebook-f icon"></i> </a>
+      </li>
+      <li class="list">
+        <a href="#" class="links"><i class="fab fa-twitter icon"></i></a>
+      </li>
+      <li class="list">
+        <a href="#" class="links"><i class="fab fa-linkedin-in icon"></i></a>
+      </li>
+      <li class="list">
+        <a href="#" class="links"><i class="fab fa-google-plus-g icon"></i></a>
+      </li>
+    </ul>
+  </footer>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const deptFilter = document.getElementById('deptFilter');
+    const statusFilter = document.getElementById('statusFilter');
+    const table = document.getElementById('complaintTable');
+    const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+    function filterTable() {
+      const searchText = searchInput.value.toLowerCase();
+      const deptValue = deptFilter.value;
+      const statusValue = statusFilter ? statusFilter.value : '';
+
+      for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        const cells = row.getElementsByTagName('td');
+        
+        const id = cells[0].textContent.toLowerCase();
+        const title = cells[1].textContent.toLowerCase();
+        const category = cells[2].textContent.toLowerCase();
+        const datetime = cells[3].textContent.toLowerCase();
+        const location = cells[4].textContent.toLowerCase();
+        const visibleStatus = cells[6] ? cells[6].textContent.toLowerCase() : '';
+
+        const matchesSearch = searchText === '' ||
+          id.includes(searchText) ||
+          title.includes(searchText) ||
+          category.includes(searchText) ||
+          location.includes(searchText);
+
+        const matchesDept = deptValue === '' || category === deptValue.toLowerCase();
+        const matchesStatus = statusValue === '' || visibleStatus === statusValue.toLowerCase();
+
+        if (matchesSearch && matchesDept && matchesStatus) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      }
+    }
+
+    searchInput.addEventListener('keyup', filterTable);
+    deptFilter.addEventListener('change', filterTable);
+    if (statusFilter) {
+      statusFilter.addEventListener('change', filterTable);
+    }
+  </script>
+</body>
+
+</html>

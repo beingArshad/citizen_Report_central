@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Civic Portal - Rural Governance</title>
+  <link rel="stylesheet" href="./Dashboard_citizen/home.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="shortcut icon" href="./assets/fav-icon.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>  
+    <div class="logo-container">
+      <img src="./assets/finallogo.png" alt="Rural Governance Logo"
+        style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(102,126,234,0.4); box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+      <b data-i18n="logo">Rural Governance</b>
+    </div>
+    <div class="nav-toggle" onclick="toggleNav()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+    <ul id="navMenu">
+      <li><a href="#" style="color: var(--primary);"><i class="fa-solid fa-house"></i> <span data-i18n="navHome">Home</span></a></li>
+      <li><a href="#features"><i class="fa-solid fa-star"></i> <span data-i18n="navFeatures">Features</span></a></li>
+      <li><a href="#timeline"><i class="fa-solid fa-list-check"></i> <span data-i18n="navHow">How It Works</span></a></li>
+      <li class="language-selector">
+        <select id="language-select" aria-label="Select Language">
+          <option value="en">English</option>
+          <option value="hi">हिन्दी</option>
+          <option value="te">Telugu</option>
+        </select>
+      </li>
+      <li>
+        <button class="login_btn" onclick="window.location.href='./Dashboard_citizen/login.html'">
+          <span data-i18n="navLogin">Login</span> <i class="fa-solid fa-right-to-bracket"></i>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Hero Video Section -->
+  <section class="hero-video-section" style="
+      margin: 32px 5% 0;
+      display: flex;
+      justify-content: center;
+    ">
+    <div style="
+        width: 100%;
+        max-width: 1100px;
+        border: 4px solid rgba(102, 126, 234, 0.55);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 12px 48px rgba(102, 126, 234, 0.22), 0 2px 8px rgba(0,0,0,0.10);
+        background: #000;
+        aspect-ratio: 16 / 9;
+      ">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        style="width: 100%; height: 100%; object-fit: cover; display: block;"
+        title="Rural village life — Pexels">
+        <source src="https://videos.pexels.com/video-files/5488113/5488113-hd_1920_1080_25fps.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+    </div>
+  </section>
+
+  <!-- Intro Banner Section -->
+  <section class="intro-banner" style="padding: 60px 5%; text-align: center; background: var(--white); box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <h1 data-i18n="heroTitle" style="font-size: 2.8rem; color: var(--primary); margin-bottom: 20px;">Digital Governance Made Simple</h1>
+      <p data-i18n="heroDesc" style="font-size: 1.2rem; color: var(--text-dark); margin-bottom: 30px;">A single smart platform connecting citizens, officers, and administrators for faster services, transparency, and better governance.</p>
+      <div>
+        <a href="#features" class="btn" data-i18n="btnExplore">Explore Features</a>
+        <a href="./login.html" class="btn btn-outline" data-i18n="btnLogin">Citizen Login</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <h2 class="section-title" data-i18n="featTitle">Why Use Our Platform?</h2>
+    <div class="feature-grid">
+      <div class="card">
+        <div class="icon"><i class="fa-solid fa-users-viewfinder"></i></div>
+        <h3 data-i18n="feat1Title">Citizen Services</h3>
+        <p data-i18n="feat1Desc">Submit requests, track complaints, and access services entirely online without visiting the Panchayat office.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><i class="fa-solid fa-eye"></i></div>
+        <h3 data-i18n="feat2Title">Our Vision</h3>
+        <p data-i18n="feat2Desc">To empower rural communities with a reliable digital platform that ensures every issue is heard, tracked, and resolved efficiently.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><i class="fa-solid fa-bullseye"></i></div>
+        <h3 data-i18n="feat3Title">Our Mission</h3>
+        <p data-i18n="feat3Desc">To simplify complaint reporting, improve communication, and enable data-driven decision making for better local governance.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <h3 data-i18n="feat4Title">What We Do</h3>
+        <p data-i18n="feat4Desc">We provide a smart web-based solution where citizens can report issues, track progress, and receive real-time updates securely.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Timeline -->
+  <section class="timeline-section" id="timeline">
+    <h2 class="section-title" data-i18n="howTitle">How It Works</h2>
+    <div class="timeline-container">
+      <div class="timeline-item">
+        <div class="timeline-marker"><i class="fa-solid fa-pen-to-square"></i></div>
+        <div class="timeline-content">
+          <h3 data-i18n="how1Title">1. Report Issue</h3>
+          <p data-i18n="how1Desc">File a complaint with photos, location, and description.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker"><i class="fa-solid fa-user-tie"></i></div>
+        <div class="timeline-content">
+          <h3 data-i18n="how2Title">2. Assignment</h3>
+          <p data-i18n="how2Desc">Issue is assigned to relevant department officer.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker"><i class="fa-solid fa-helmet-safety"></i></div>
+        <div class="timeline-content">
+          <h3 data-i18n="how3Title">3. Processing</h3>
+          <p data-i18n="how3Desc">Officer investigates and takes action on the ground.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker"><i class="fa-solid fa-check-double"></i></div>
+        <div class="timeline-content">
+          <h3 data-i18n="how4Title">4. Resolution</h3>
+          <p data-i18n="how4Desc">Complaint resolved and you receive instant updates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact Section: Interactive Before/After -->
+  <section class="impact-section" id="impact">
+    <h2 class="section-title" data-i18n="impactTitle">See The Impact</h2>
+    <p data-i18n="impactDesc" style="text-align:center; margin-bottom: 40px; color: var(--text-light); font-size: 1.1rem;">Slide to see the transformation of our villages through the Rural Governance platform.</p>
+    
+    <div class="comparison-slider">
+      <!-- After Image (Background) -->
+      <img src="./assets/road_before.png" alt="After: Concrete Paved Road">
+      <span class="label after-label">After</span>
+
+      <!-- Before Image (Clipped) -->
+      <div class="img-wrapper before">
+        <img src="../assets/road_after.png" alt="Before: Muddy Village Road">
+        <span class="label before-label">Before</span>
+      </div>
+      
+      <!-- Slider Control -->
+      <input type="range" min="0" max="100" value="50" class="slider" name="slider" id="impact-slider">
+      <div class="slider-button"><i class="fa-solid fa-arrows-left-right"></i></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-info">
+        <h3>Rural Governance</h3>
+        <p>Empowering citizens and bridging the gap between villages and administration.</p>
+        <div class="contact-info">
+          <p><i class="fa-solid fa-envelope"></i> support@ruralgovernance.in</p>
+          <p><i class="fa-solid fa-phone"></i> +91 1800-123-4567</p>
+        </div>
+      </div>
+      <div class="footer-social">
+        <h4>Connect With Us</h4>
+        <div class="social-links">
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Rural Governance Platform | All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      document.getElementById("navMenu").classList.toggle("active");
+    }
+
+    // Functional Language Dictionary
+    const translations = {
+      en: {
+        logo: "Rural Governance",
+        navHome: "Home",
+        navFeatures: "Features",
+        navHow: "How It Works",
+        navLogin: "Login",
+        heroTitle: "Digital Governance Made Simple",
+        heroDesc: "A single smart platform connecting citizens, officers, and administrators for faster services, transparency, and better governance.",
+        btnExplore: "Explore Features",
+        btnLogin: "Citizen Login",
+        featTitle: "Why Use Our Platform?",
+        feat1Title: "Citizen Services",
+        feat1Desc: "Submit requests, track complaints, and access services entirely online without visiting the Panchayat office.",
+        feat2Title: "Our Vision",
+        feat2Desc: "To empower rural communities with a reliable digital platform that ensures every issue is heard, tracked, and resolved efficiently.",
+        feat3Title: "Our Mission",
+        feat3Desc: "To simplify complaint reporting, improve communication, and enable data-driven decision making for better local governance.",
+        feat4Title: "What We Do",
+        feat4Desc: "We provide a smart web-based solution where citizens can report issues, track progress, and receive real-time updates securely.",
+        howTitle: "How It Works",
+        how1Title: "1. Report Issue",
+        how1Desc: "File a complaint with photos, location, and description.",
+        how2Title: "2. Assignment",
+        how2Desc: "Issue is assigned to relevant department officer.",
+        how3Title: "3. Processing",
+        how3Desc: "Officer investigates and takes action on the ground.",
+        how4Title: "4. Resolution",
+        how4Desc: "Complaint resolved and you receive instant updates.",
+        impactTitle: "See The Impact",
+        impactDesc: "Slide to see the transformation of our villages through the Rural Governance platform."
+      },
+      hi: {
+        logo: "ग्रामीण शासन",
+        navHome: "होम",
+        navFeatures: "विशेषताएं",
+        navHow: "यह कैसे काम करता है",
+        navLogin: "लॉगिन",
+        heroTitle: "डिजिटल शासन हुआ आसान",
+        heroDesc: "नागरिकों, अधिकारियों और प्रशासकों को तेज सेवाओं, पारदर्शिता और बेहतर शासन के लिए जोड़ने वाला एक स्मार्ट मंच।",
+        btnExplore: "विशेषताएं देखें",
+        btnLogin: "नागरिक लॉगिन",
+        featTitle: "हमारे मंच का उपयोग क्यों करें?",
+        feat1Title: "नागरिक सेवाएं",
+        feat1Desc: "पंचायत कार्यालय जाए बिना ऑनलाइन अनुरोध सबमिट करें, शिकायतें ट्रैक करें और सेवाओं का उपयोग करें।",
+        feat2Title: "हमारा नज़रिया",
+        feat2Desc: "ग्रामीण समुदायों को एक विश्वसनीय डिजिटल मंच के साथ सशक्त बनाना जो सुनिश्चित करता है कि हर मुद्दे को सुना जाए।",
+        feat3Title: "हमारा लक्ष्य",
+        feat3Desc: "शिकायत रिपोर्टिंग को सरल बनाना, संचार में सुधार करना और बेहतर स्थानीय शासन के लिए डेटा-संचालित निर्णय सक्षम करना।",
+        feat4Title: "हम क्या करते हैं",
+        feat4Desc: "हम एक वेब-आधारित समाधान प्रदान करते हैं जहां नागरिक मुद्दों की रिपोर्ट कर सकते हैं, प्रगति को ट्रैक कर सकते हैं।",
+        howTitle: "यह कैसे काम करता है",
+        how1Title: "1. समस्या की रिपोर्ट करें",
+        how1Desc: "तस्वीरों, स्थान और विवरण के साथ शिकायत दर्ज करें।",
+        how2Title: "2. कार्य सौंपना",
+        how2Desc: "संबंधित विभाग के अधिकारी को समस्या सौंपी जाती है।",
+        how3Title: "3. प्रक्रिया",
+        how3Desc: "अधिकारी जांच करता है और जमीनी स्तर पर कार्रवाई करता है।",
+        how4Title: "4. समाधान",
+        how4Desc: "शिकायत हल हो गई और आपको तत्काल अपडेट प्राप्त होते हैं।",
+        impactTitle: "प्रभाव देखें",
+        impactDesc: "ग्रामीण शासन मंच के माध्यम से हमारे गांवों के परिवर्तन को देखने के लिए स्लाइड करें।"
+      },
+      te: {
+        logo: "గ్రామీణ పరిపాలన",
+        navHome: "హోమ్",
+        navFeatures: "లక్షణాలు",
+        navHow: "ఇది ఎలా పనిచేస్తుంది",
+        navLogin: "లాగిన్",
+        heroTitle: "డిజిటల్ పరిపాలన సులభం చేయబడింది",
+        heroDesc: "వేగవంతమైన సేవలు, పారదర్శకత మరియు మెరుగైన పాలన కోసం పౌరులు మరియు అధికారులను కలుపుతున్న ఒక స్మార్ట్ ప్లాట్‌ఫాం.",
+        btnExplore: "లక్షణాలు అన్వేషించండి",
+        btnLogin: "సిటిజెన్ లాగిన్",
+        featTitle: "మా ప్లాట్‌ఫాం ఎందుకు ఉపయోగించాలి?",
+        feat1Title: "పౌర సేవలు",
+        feat1Desc: "పంచాయతీ కార్యాలయాన్ని సందర్శించకుండా ఆన్‌లైన్‌లో అభ్యర్థనలను సమర్పించండి, ఫిర్యాదులను ట్రాక్ చేయండి.",
+        feat2Title: "మా లక్ష్యం",
+        feat2Desc: "ప్రతి సమస్య వినబడుతుందని మరియు సమర్థవంతంగా పరిష్కరించబడుతుందని నిర్ధారించే నమ్మకమైన డిజిటల్ ప్లాట్‌ఫాం.",
+        feat3Title: "మా మిషన్",
+        feat3Desc: "ఫిర్యాదుల రిపోర్టింగ్‌ను సరళీకృతం చేయడం, కమ్యూనికేషన్‌ను మెరుగుపరచడం.",
+        feat4Title: "మేము ఏమి చేస్తాము",
+        feat4Desc: "మేము పౌరులు సమస్యలను నివేదించే వెబ్ ఆధారిత పరిష్కారాన్ని అందిస్తాము.",
+        howTitle: "ఇది ఎలా పనిచేస్తుంది",
+        how1Title: "1. సమస్యను నివేదించండి",
+        how1Desc: "ఫోటోలు మరియు వివరణతో ఫిర్యాదును ఫైల్ చేయండి.",
+        how2Title: "2. కేటాయింపు",
+        how2Desc: "సమస్య సంబంధిత అధికారికి కేటాయించబడుతుంది.",
+        how3Title: "3. ప్రాసెసింగ్",
+        how3Desc: "అధికారి దర్యాప్తు చేసి చర్యలు తీసుకుంటారు.",
+        how4Title: "4. పరిష్కారం",
+        how4Desc: "ఫిర్యాదు పరిష్కరించబడింది మరియు మీరు నవీకరణలను పొందుతారు.",
+        impactTitle: "ప్రభావం చూడండి",
+        impactDesc: "గ్రామీణ పరిపాలన ద్వారా మా గ్రామాల పరివర్తనను చూడటానికి స్లైడ్ చేయండి."
+      }
+    };
+
+    function changeLanguage(lang) {
+      document.querySelectorAll("[data-i18n]").forEach(elem => {
+        const key = elem.getAttribute("data-i18n");
+        if (translations[lang] && translations[lang][key]) {
+          elem.textContent = translations[lang][key];
+        }
+      });
+    }
+
+    // Initialize Language Selector
+    const languageSelect = document.getElementById('language-select');
+    if (languageSelect) {
+      const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+      languageSelect.value = savedLanguage;
+      changeLanguage(savedLanguage);
+      
+      languageSelect.addEventListener('change', (e) => {
+        const selectedLang = e.target.value;
+        localStorage.setItem('selectedLanguage', selectedLang);
+        changeLanguage(selectedLang);
+      });
+    }
+
+    // Image Comparison Slider functionality
+    const slider = document.getElementById('impact-slider');
+    const beforeImg = document.querySelector('.img-wrapper.before');
+    const sliderBtn = document.querySelector('.slider-button');
+
+    if(slider) {
+      slider.addEventListener('input', (e) => {
+        const sliderPos = e.target.value;
+        beforeImg.style.width = `${sliderPos}%`;
+        sliderBtn.style.left = `calc(${sliderPos}% - 18px)`;
+      });
+    }
+  </script>
+</body>
+</html>

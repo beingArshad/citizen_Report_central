@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solar Steps Section</title>
+
+<style>
+
+/*RESET*/
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+  background:#f4f4f4;
+}
+
+/*SECTION*/
+.steps-section{
+  background:#ffffff;
+  padding:80px 20px;
+}
+
+/*GRID*/
+.steps-container{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-top:1px solid #ddd;
+  border-bottom:1px solid #ddd;
+}
+
+.step{
+  text-align:center;
+  padding:50px 30px;
+  border-right:1px solid #e2e2e2;
+}
+
+.step:last-child{
+  border-right:none;
+}
+
+/*BIG CIRCLES*/
+.circle{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  margin:0 auto 30px;
+}
+.img{
+/* padding: 10px; */
+width:150px;
+height:150px;
+border-radius:50%;
+/* margin:0 auto 30px; */
+border:  solid #f1c644 5px;
+}
+
+.step h3{
+  font-size:22px;
+  margin-bottom:15px;
+}
+
+.step p{
+  color:#666;
+  line-height:1.7;
+  font-size:15px;
+}
+
+/*RESPONSIVE*/
+@media(max-width:992px){
+  .steps-container{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .step:nth-child(2n){
+    border-right:none;
+  }
+}
+
+@media(max-width:600px){
+  .steps-container{
+    grid-template-columns:1fr;
+  }
+
+  .step{
+    border-right:none;
+    border-bottom:1px solid #e2e2e2;
+  }
+
+  .step:last-child{
+    border-bottom:none;
+  }
+}
+
+/* ******About US********** */
+
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+  background:#f5f5f5;
+}
+
+/* ===== HERO SECTION ===== */
+.about-hero{
+  position:relative;
+  height:420px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+  overflow:hidden;
+
+  /* BLUE → BLACK → WHITE GRADIENT */
+  background:linear-gradient(
+      90deg,
+      #0b3d91 0%,     /* blue */
+      #000000 55%,    /* black */
+      #ffffff 120%    /* white fade */
+  );
+}
+
+/* ===== CONTENT ===== */
+.hero-content h1{
+  font-size:72px;
+  font-weight:700;
+  margin-bottom:15px;
+  letter-spacing:1px;
+}
+
+.breadcrumb{
+  font-size:18px;
+  opacity:0.9;
+}
+
+.breadcrumb span{
+  margin:0 8px;
+  opacity:0.7;
+}
+
+/* ===== RIGHT CIRCLE PATTERN ===== */
+.about-hero::after{
+  content:"";
+  position:absolute;
+  right:-150px;
+  top:-100px;
+  width:600px;
+  height:600px;
+  opacity:0.15;
+  border-radius:50%;
+
+  background:repeating-radial-gradient(
+      circle,
+      rgba(255,255,255,0.6) 0px,
+      rgba(255,255,255,0.6) 1px,
+      transparent 1px,
+      transparent 14px
+  );
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+
+  .hero-content h1{
+    font-size:42px;
+  }
+
+  .about-hero{
+    height:300px;
+  }
+}
+
+
+
+</style>
+</head>
+
+<body>
+  <section class="about-hero">
+  <div class="hero-content">
+    <h1>About Us</h1>
+    <div class="breadcrumb">
+      Home <span>›</span> About Us
+    </div>
+  </div>
+</section>
+
+<section class="steps-section">
+  <div class="steps-container">
+
+    <div class="step">
+      <div class="circle yellow"><img src="./vikram.jpeg.jpg" alt="" class="img"></div>
+      <h3>Report Local Issues</h3>
+      <p>
+        Speak with our platform to report village problems quickly and easily.
+Citizens can share concerns directly with the responsible authorities..
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="circle green"><img src="./AK.jpeg" alt="" class="img"></div>
+      <h3>Government Response</h3>
+      <p>
+        Your reports are forwarded to the concerned government departments.
+We help connect citizens and officials for faster solutions.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="circle yellow"><img src="./akhil.jpeg" alt="" class="img"></div>
+      <h3>Transparent Tracking</h3>
+      <p>
+        Track the status of your complaint in real time.
+Stay informed with updates until the issue is resolved.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="circle green"><img src="./chandini.jpeg" alt="" class="img"></div>
+      <h3>Community Improvement</h3>
+      <p>
+        Together we build better villages through active participation.
+Citizen voices help create cleaner, safer, and smarter communities.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>

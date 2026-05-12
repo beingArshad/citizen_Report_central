@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Citizen Notifications</title>
+<!-- <link rel="stylesheet" href="./desktop.css" /> -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"> 
+    <link rel="shortcut icon" href="./assets/fav-icon.png" type="image/x-icon">
+    
+  <link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@100..900&display=swap" rel="stylesheet"> 
+<style>
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+/* HEADER */
+.header{
+    background:#13422c;
+    color:white;
+    padding:18px;
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+/* CONTAINER */
+.container{
+  max-width:1200px;
+  width:calc(100% - 40px);
+  margin:30px auto;
+  padding: 0 20px;
+}
+
+/* CARD */
+.notification{
+    background:white;
+    padding:18px;
+    margin-bottom:15px;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+    transition:0.3s;
+}
+
+.notification:hover{
+    transform:scale(1.02);
+}
+
+/* LEFT SIDE */
+.left{
+    display:flex;
+    align-items:center;
+}
+
+.icon{
+    font-size:28px;
+    margin-right:15px;
+}
+
+/* TEXT */
+.title{
+    font-weight:bold;
+    color:#13422c;
+}
+
+.message{
+    font-size:14px;
+    color:#555;
+}
+
+/* STATUS BADGE */
+.status{
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:13px;
+    color:white;
+}
+
+.pending{
+    background:#f39c12;
+}
+
+.progress{
+    background:#3498db;
+}
+
+.resolved{
+    background:#2ecc71;
+}
+
+/* TIME */
+.time{
+    font-size:12px;
+    color:#888;
+    margin-top:5px;
+}
+/* make icons and badges scale and prevent overflow */
+.icon{ font-size:28px; }
+.status{ white-space:nowrap; }
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .container{ width:100%; padding: 0 12px; }
+  .notification{ flex-direction: column; align-items: flex-start; }
+  .left{ width:100%; }
+  .status{ align-self: flex-end; margin-top: 12px; }
+  .message{ font-size:13px; }
+  .title{ font-size:16px; }
+}
+  nav {
+      display: flex;
+      justify-content: space-between;
+      /* gap: 100px; */
+      align-items: center;
+      padding: 16px 80px;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      
+    }
+
+     nav .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    nav ul {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    /* brand (logo) shown separately so it remains visible on mobile */
+    .brand img {
+      display: block;
+      width: 36px;
+      height: auto;
+    }
+
+    /* hamburger button (hidden on desktop)
+       - three bars inside, toggles the mobile menu */
+    .nav-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 60;
+    }
+
+    .nav-toggle .bar {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #333;
+      margin: 4px 0;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    /* Responsive: collapse nav into hamburger on small screens */
+    @media (max-width: 768px) {
+      nav {
+        padding: 12px 16px;
+      }
+
+      /* show the hamburger */
+      .nav-toggle { display: inline-flex; }
+
+      /* hide the horizontal menu by default */
+      nav ul {
+        position: absolute;
+        top: 64px;
+        right: 16px;
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        background: white;
+        padding: 10px 12px;
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        z-index: 50;
+      }
+
+      nav ul.open { display: flex; }
+
+      /* make each menu item full-width and spaced */
+      nav ul li { padding: 8px 0; }
+
+      /* remove the large gap used on desktop (logo sits separate) */
+      nav ul li.logo { margin-right: 0; }
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 700;
+    }
+
+    nav ul li a:hover { color: var(--primary); }
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="brand">
+    <a href="/home.html"><img src="./logo.html.jpeg" alt="logo" width="36" /></a>
+  </div>
+
+  <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+
+  <ul>
+    <li><i class="fa-regular fa-house"></i> <a href="/home.html">Home</a></li>
+    <li><i class="fa-solid fa-file"></i> <a href="./report.html">Report Complaint</a></li>
+    <li><i class="fa-solid fa-bookmark"></i> <a href="./citizen.html"> My Complaints</a></li>
+    <li><i class="fa-solid fa-bell"></i> <a href="./citizen_notification.html">Notifications</a></li>
+    <li><i class="fa-regular fa-address-card"></i><a href="./profile.html"> Profile</a></li>
+  </ul>
+
+</nav>
+
+<div class="container">
+
+    <div class="notification">
+        <div class="left">
+            <div class="icon">🗑️</div>
+            <div>
+                <div class="title">Garbage Complaint Submitted</div>
+                <div class="message">Your complaint has been successfully registered.</div>
+                <div class="time">Today - 10:30 AM</div>
+            </div>
+        </div>
+        <div class="status pending">Pending</div>
+    </div>
+
+    <div class="notification">
+        <div class="left">
+            <div class="icon">💡</div>
+            <div>
+                <div class="title">Streetlight Issue Assigned</div>
+                <div class="message">Your complaint is assigned to Electricity Department.</div>
+                <div class="time">Yesterday - 4:20 PM</div>
+            </div>
+        </div>
+        <div class="status progress">In Progress</div>
+    </div>
+
+    <div class="notification">
+        <div class="left">
+            <div class="icon">🚧</div>
+            <div>
+                <div class="title">Road Damage Resolved</div>
+                <div class="message">The reported road issue has been fixed successfully.</div>
+                <div class="time">2 Days Ago</div>
+            </div>
+        </div>
+        <div class="status resolved">Resolved</div>
+    </div>
+
+    <div class="notification">
+        <div class="left">
+            <div class="icon">☠️</div>
+            <div>
+                <div class="title">Dead Animal Removal Completed</div>
+                <div class="message">Municipal team has cleared the reported location.</div>
+                <div class="time">3 Days Ago</div>
+            </div>
+        </div>
+        <div class="status resolved">Resolved</div>
+    </div>
+
+</div>
+
+  <script>
+    (function(){
+      const toggle = document.querySelector('.nav-toggle');
+      const navUl = document.querySelector('nav ul');
+      if (!toggle || !navUl) return;
+      toggle.addEventListener('click', function(){
+        const expanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', String(!expanded));
+        navUl.classList.toggle('open');
+      });
+      // Close menu on resize to desktop
+      window.addEventListener('resize', function(){
+        if (window.innerWidth > 768) navUl.classList.remove('open');
+      });
+    })();
+  </script>
+
+</body>
+</html>
+</body>
+</html>

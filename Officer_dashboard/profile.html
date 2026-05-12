@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Officer Profile</title>
+    <link rel="stylesheet" href="./css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Saira:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="top-bar">
+        <div class="logo">
+            <img src="../assets/finallogo.png" alt="Rural Governance Logo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(102,126,234,0.4);">
+        </div>
+
+        <button class="hamburger toggle-btn" onclick="toggleNav()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
+            <span class="close-nav" onclick="toggleNav()">&times;</span>
+
+            <li><a href="home.html"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="complaints.html" class="active"><i class="fa-solid fa-file-lines"></i> Complaints</a></li>
+            <li><a href="workers.html"><i class="fa-solid fa-person-digging"></i> Workers</a></li>
+            <li><a href="analysis.html"><i class="fa-solid fa-chart-column"></i>Analysis</a></li>
+            <li><a href="profile.html"><i class="fa-regular fa-address-card"></i> Profile</a></li>
+        </ul>
+    </div>
+
+    <div class="top-nav">
+        <h2 style="color: var(--primary-color);"><i class="fas fa-id-card"></i> Official Profile</h2>
+    </div>
+
+    <div class="profile-container">
+        <div class="profile-card">
+            <div class="avatar">
+                <img src="https://ui-avatars.com/api/?name=Akhil+Teja&background=3498db&color=fff&size=160&font-size=0.4"
+                    alt="Akhil Teja">
+            </div>
+            <h2>Akhil Teja</h2>
+            <h4>Chief Nodal Officer</h4>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong>Email Address</strong><br>
+                        akhil.teja@gov-admin.in
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <div>
+                        <strong>Official Contact</strong><br>
+                        +91 98765 43210
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <strong>Office Location</strong><br>
+                        Room 402, Main Secretariat Building, GHMC Head Office, Hyderabad.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="details-section">
+
+            <div class="info-card">
+                <h3 class="section-title"><i class="fas fa-user-tie"></i> Employment Details</h3>
+
+                <div class="official-grid">
+                    <div class="detail-box">
+                        <label>Employee ID</label>
+                        <span>TS-GOV-8402</span>
+                    </div>
+                    <div class="detail-box">
+                        <label>Department</label>
+                        <span>Municipal Administration</span>
+                    </div>
+                    <div class="detail-box">
+                        <label>Zone</label>
+                        <span>GHMC Central Zone</span>
+                    </div>
+                    <div class="detail-box">
+                        <label>Area</label>
+                        <span>Central Hyderabad</span>
+                    </div>
+                    <div class="detail-box">
+                        <label>Incharge Area</label>
+                        <span>Banjara Hills & Jubilee Hills</span>
+                    </div>
+                    <div class="detail-box">
+                        <label>Experience</label>
+                        <span>4.5 Years</span>
+                    </div>
+                    <div class="detail-box">
+                        <label>Joining Date</label>
+                        <span>12th August 2021</span>
+                    </div>
+                    <div class="detail-box">
+                        <label>Clearance Level</label>
+                        <span style="color: var(--success-color);"><i class="fas fa-check-circle"></i> Level 4
+                            (Admin)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3 class="section-title"><i class="fas fa-chart-line"></i> Performance Overview (March 2026)</h3>
+
+                <div class="performance-grid">
+                    <div class="perf-stat">
+                        <h3 style="color: var(--success-color);">142</h3>
+                        <p>Tasks Completed</p>
+                    </div>
+                    <div class="perf-stat">
+                        <h3 style="color: var(--warning-color);">4.2h</h3>
+                        <p>Avg. Resolution Time</p>
+                    </div>
+                    <div class="perf-stat">
+                        <h3 style="color: var(--purple-color);">4.8/5</h3>
+                        <p>Public Satisfaction Rating</p>
+                    </div>
+                </div>
+
+                <div class="progress-group">
+                    <div class="progress-header">
+                        <span>SLA Compliance (On-Time Resolution)</span>
+                        <span>92%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-fill fill-success"></div>
+                    </div>
+                </div>
+
+                <div class="progress-group">
+                    <div class="progress-header">
+                        <span>Field Worker Deployment Efficiency</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-fill fill-purple"></div>
+                    </div>
+                </div>
+
+                <div class="progress-group">
+                    <div class="progress-header">
+                        <span>Pending Complaints Backlog</span>
+                        <span>22% (Requires Attention)</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-fill fill-warning" style="width: 22%;"></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

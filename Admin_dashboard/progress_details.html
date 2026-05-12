@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complaint Progress</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+body{
+  font-family:Segoe UI;
+  background:#f4f6fb;
+  padding:20px;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  background:white;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+  .back-link { 
+   display: inline-block;
+   margin-bottom: 20px;
+   color: #1d4ed8;
+   text-decoration: none; 
+   font-weight: 600;
+}
+
+
+h2{
+  margin-bottom:20px;
+}
+
+/* INFO */
+.info{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.info div{
+  background:#f1f5ff;
+  padding:12px;
+  border-radius:8px;
+}
+
+/* TIMELINE */
+.timeline{
+  border-left:3px solid #0a6cff;
+  padding-left:19px;
+  margin-top: 40px;
+}
+
+.update{
+  margin-bottom:20px;
+  position:relative;
+}
+
+.update::before{
+  content:'';
+  width:12px;
+  height:12px;
+  background:#0a6cff;
+  border-radius:50%;
+  position:absolute;
+  left:-26px;
+  top:5px;
+}
+
+/* BUTTON */
+.btn{
+  background:#0a6cff;
+  color:white;
+  padding:10px 15px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  margin-top:15px;
+}
+
+/* INPUT BOX */
+#inputBox{
+  display:none;
+  margin-top:15px;
+}
+
+#inputBox textarea{
+  width:100%;
+  height:80px;
+  margin-bottom:10px;
+  padding:8px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<a href="in_progress.html" class="back-link"><i class="fa fa-arrow-left"></i> Back to In Progress Complaints</a>
+<h2>Complaint Progress Details</h2>
+
+<!-- DETAILS -->
+<div class="info">
+  <div><b>Complaint ID:</b> #CMP1023</div>
+  <div><b>Raised On:</b> 23-03-2026 02:15 PM</div>
+  <div><b>Assigned Officer:</b> Ravi Kumar</div>
+  <div><b>Assigned Date:</b> 24-03-2026</div>
+</div>
+
+<!-- TIMELINE -->
+<h3>Work Updates</h3>
+
+ <div class="timeline" id="timeline"> 
+
+  <div class="update">
+    <p><b>24-03-2026 11:00 AM</b></p>
+    <p>Inspection completed.</p>
+  </div>
+
+</div>
+
+<!-- BUTTON -->
+<button class="btn" onclick="showInput()">Send Remainder</button>
+
+<!-- INPUT BOX -->
+<div id="inputBox">
+  <textarea id="updateText" placeholder="Enter update..."></textarea>
+  <button class="btn" onclick="addUpdate()">Submit</button>
+</div>
+
+</div>
+
+<script>
+
+function showInput(){
+  document.getElementById("inputBox").style.display="block";
+}
+
+function addUpdate(){
+  let text=document.getElementById("updateText").value;
+
+  if(text===""){
+    alert("Enter update!");
+    return;
+  }
+
+  let now=new Date();
+  let date=now.toLocaleDateString('en-GB');
+  let time=now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+
+  let update=`
+  <div class="update">
+    <p><b>${date} ${time}</b></p>
+    <p>${text}</p>
+  </div>
+  `;
+
+  document.getElementById("timeline").innerHTML+=update;
+
+  document.getElementById("updateText").value="";
+  document.getElementById("inputBox").style.display="none";
+}
+
+</script>
+
+</body>
+</html>

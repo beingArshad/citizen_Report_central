@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citizen Dashboard - Rural Governance</title>
+  <link rel="stylesheet" href="./citizen.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="shortcut icon" href="./assets/fav-icon.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+  <!-- Navigation -->
+  <nav>  
+    <div class="logo-container">
+      <img src="../assets/finallogo.png" alt="Rural Governance Logo"
+        style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(102,126,234,0.4); box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+      <b>Welcome, Afrah</b>
+    </div>
+    <div class="nav-toggle" onclick="toggleNav()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+    <ul id="navMenu">
+      <li><a href="./citizen.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+      <li><a href="./notification.html"><i class="fa-solid fa-bell"></i> Notifications</a></li>
+      <li><a href="./profile.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+      <li><a href="../index.html" style="color: #ef4444;"><i class="fa-solid fa-right-from-bracket" style="color: #ef4444;"></i> Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section with Real Images -->
+  <section class="hero">
+    <div class="image-slider">
+      <div class="slider-container">
+        <div class="slider-wrapper">
+          <div class="slide fade active">
+            <img src="../assets/rural_road_construction.png" alt="Rural Road Construction">
+          </div>
+          <div class="slide fade">
+            <img src="../assets/rural_drainage_repair.png" alt="Village Drainage Repair Works">
+          </div>
+          <div class="slide fade">
+            <img src="../assets/rural_infrastructure_development.png" alt="Concrete Road Infrastructure Development">
+          </div>
+        </div>
+        
+        <!-- Navigation Buttons -->
+        <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+        <a class="next" onclick="changeSlide(1)">&#10095;</a>
+      </div>
+      
+      <!-- Dots -->
+      <div class="dots-container">
+        <span class="dot active" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+      </div>
+
+      <div class="hero-overlay-text">
+        <h1>Rural Governance Platform</h1>
+        <p>Empowering citizens to build better communities together.</p>
+      </div>
+    </div>
+  </section>
+     
+  <!-- Main Dashboard Hub -->
+  <div class="main-container">
+    <div class="cards-section">
+      <a href="./Total_complaints.html" class="action-card">
+        <i class="fa-solid fa-file-lines"></i>
+        <h3>Total Complaints</h3>
+        <div class="stat">12</div>
+      </a>
+      <a href="./pending_complaints.html" class="action-card">
+        <i class="fa-solid fa-hourglass-half"></i>
+        <h3>Pending</h3>
+        <div class="stat">5</div>
+      </a>
+      <a href="./resolved_complaints.html" class="action-card">
+        <i class="fa-solid fa-circle-check"></i>
+        <h3>Resolved</h3>
+        <div class="stat">7</div>
+      </a>
+      
+      <!-- Second row of cards now merged into the same grid -->
+      <a href="./post_complaint.html" class="action-card">
+        <i class="fa-solid fa-circle-plus"></i>
+        <h3>Post Complaint</h3>
+        <p>Submit a new issue</p>
+      </a>
+      <a href="./rate_service.html" class="action-card">
+        <i class="fa-solid fa-star"></i>
+        <h3>Rate Service</h3>
+        <p>Share your feedback</p>
+      </a>
+      <a href="./track_complaints.html" class="action-card">
+        <i class="fa-solid fa-magnifying-glass-chart"></i>
+        <h3>Track Complaints</h3>
+        <p>View detailed progress</p>
+      </a>
+    </div>
+
+    <!-- Service Level Agreements -->
+    <div class="services-section">
+      <h2>Service Level Agreements</h2>
+      <p class="subtitle">Rural Governance platform aims to foster large scale citizen participation. The system works on the number of complaints resolved by the corporation, with adherence to Service Level Agreements.</p>
+
+      <div class="icon-grid">
+        <div class="icon-card">
+          <div class="icon-circle"><i class="fa-solid fa-paw fa-2x" style="color: var(--primary);"></i></div>
+          <span>Dead Animal</span>
+        </div>
+        <div class="icon-card">
+          <div class="icon-circle"><i class="fa-solid fa-trash fa-2x" style="color: var(--primary);"></i></div>
+          <span>Garbage</span>
+        </div>
+        <div class="icon-card">
+          <div class="icon-circle"><i class="fa-solid fa-dumpster fa-2x" style="color: var(--primary);"></i></div>
+          <span>Dump Yard</span>
+        </div>
+        <div class="icon-card">
+          <div class="icon-circle"><i class="fa-solid fa-water fa-2x" style="color: var(--primary);"></i></div>
+          <span>Drain Cleaning</span>
+        </div>
+        <div class="icon-card">
+          <div class="icon-circle"><i class="fa-solid fa-truck-front fa-2x" style="color: var(--primary);"></i></div>
+          <span>Waste Vehicle</span>
+        </div>
+        <div class="icon-card">
+          <div class="icon-circle"><i class="fa-solid fa-broom fa-2x" style="color: var(--primary);"></i></div>
+          <span>Street Sweeping</span>
+        </div>
+        <div class="icon-card">
+          <div class="icon-circle"><i class="fa-solid fa-restroom fa-2x" style="color: var(--primary);"></i></div>
+          <span>Public Toilet</span>
+        </div>
+        <div class="icon-card">
+          <div class="icon-circle"><i class="fa-solid fa-faucet-drip fa-2x" style="color: var(--primary);"></i></div>
+          <span>Water Supply</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-info">
+        <h3>Rural Governance</h3>
+        <p>Empowering citizens and bridging the gap between villages and administration.</p>
+        <div class="contact-info">
+          <p><i class="fa-solid fa-envelope"></i> support@ruralgovernance.in</p>
+          <p><i class="fa-solid fa-phone"></i> +91 1800-123-4567</p>
+        </div>
+      </div>
+      <div class="footer-social">
+        <h4>Connect With Us</h4>
+        <div class="social-links">
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Rural Governance Platform | All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile Nav Toggle
+    function toggleNav() {
+      document.getElementById("navMenu").classList.toggle("active");
+    }
+
+    // Image Slider
+    let currentSlideIndex = 1;
+    let slideTimer;
+
+    function initSlider() {
+      showSlide(currentSlideIndex);
+      startTimer();
+    }
+
+    function startTimer() {
+      slideTimer = setInterval(() => { changeSlide(1); }, 5000);
+    }
+
+    function resetTimer() {
+      clearInterval(slideTimer);
+      startTimer();
+    }
+    
+    function changeSlide(n) {
+      showSlide(currentSlideIndex += n);
+      resetTimer();
+    }
+    
+    function currentSlide(n) {
+      showSlide(currentSlideIndex = n);
+      resetTimer();
+    }
+    
+    function showSlide(n) {
+      const slides = document.getElementsByClassName('slide');
+      const dots = document.getElementsByClassName('dot');
+      
+      if (n > slides.length) { currentSlideIndex = 1; }
+      if (n < 1) { currentSlideIndex = slides.length; }
+      
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].classList.remove('active');
+        dots[i].classList.remove('active');
+      }
+      
+      slides[currentSlideIndex - 1].classList.add('active');
+      dots[currentSlideIndex - 1].classList.add('active');
+    }
+
+    window.onload = initSlider;
+  </script>
+</body>
+</html>

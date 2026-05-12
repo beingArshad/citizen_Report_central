@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+:root{
+  --blue:#0a6cff;
+  --black:#0f172a;
+  --bg:#f4f6fb;
+  --white:#fff;
+  --nav-height:72px;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Segoe UI, Arial, sans-serif;
+}
+
+body{
+  background:var(--bg);
+}
+
+/* ===== NAVBAR (FIXED) ===== */
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:var(--nav-height);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 40px;
+  background:white;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  z-index:3000;
+}
+
+
+
+nav ul{
+  display:flex;
+  gap:24px;
+  list-style:none;
+}
+
+nav ul li a{
+  text-decoration:none;
+  color:#000;
+  font-weight:500;
+}
+
+nav ul li a:hover{
+  color:var(--blue);
+}
+
+.login_btn{
+  padding:10px 18px;
+  border-radius:80px;
+  border:1px solid black;
+  background:transparent;
+  cursor:pointer;
+}
+
+.login_btn:hover{
+  background:var(--blue);
+}
+
+.login_anchor{
+  text-decoration:none;
+  color:black;
+}
+
+.login_btn:hover .login_anchor{
+  color:white;
+}
+
+
+/* ===== MENU TOGGLE ===== */
+#menu-toggle{ display:none; }
+
+.menu-btn{
+  display:none;
+  background:white;
+  color:var(--black);
+  padding:8px 12px;
+  font-size:18px;
+  cursor:pointer;
+  border-radius:6px;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  position:fixed;
+  top:var(--nav-height);
+  left:0;
+  width:240px;
+  height:calc(100vh - var(--nav-height));
+  background:var(--black);
+  color:white;
+  padding:25px 20px;
+  z-index:2000;
+  overflow-y:auto;
+  transition:0.3s ease;
+}
+
+.sidebar::-webkit-scrollbar{
+  width:6px;
+}
+.sidebar::-webkit-scrollbar-thumb{
+  background:#555;
+  border-radius:10px;
+}
+
+.sidebar-close{
+  display:none;
+  position:absolute;
+  top:20px;
+  right:20px;
+  font-size:20px;
+  cursor:pointer;
+  color:white;
+  background:rgba(255,255,255,0.15);
+  padding:6px 10px;
+  border-radius:6px;
+}
+
+.sidebar a{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:white;
+  text-decoration:none;
+  padding:12px;
+  border-radius:8px;
+  margin-bottom:12px;
+  transition:0.3s;
+}
+
+.sidebar a:hover{
+  background:var(--blue);
+  transform:translateX(6px);
+}
+
+/* ===== MAIN CONTENT (SCROLLS UNDER NAVBAR) ===== */
+ .main{
+  margin-top:var(--nav-height);
+  margin-left:260px;
+  padding:35px;
+  min-height:100vh; 
+} 
+
+.main-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.back-btn{
+  background:var(--blue);
+  color:white;
+  padding:6px 12px;
+  border-radius:6px;
+  text-decoration:none;
+}
+
+/* ===== CARDS ===== */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:25px;
+  margin-top:25px;
+}
+
+.card{
+  background:white;
+  padding:25px;
+  border-radius:14px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  transition:0.4s;
+}
+
+.card:hover{
+  transform:translateY(-10px);
+}
+
+/* Chart Wrappers */
+.chart-container,
+.pie-chart-wrapper{
+  width: 100%;
+  max-width: 500px;
+  margin: 30px auto;
+}
+
+.pie-chart-wrapper{
+  max-width: 300px; /* Smaller pie chart */
+}
+
+.charts-wrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+/* ********FOOTER********** */
+/* **********FOOTER************ */
+footer {
+      background: var(--black);
+      color: white;
+      padding: 40px;
+      text-align: center;
+      margin-top: 240px;
+
+    }
+
+    footer .logos {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    footer .logos .list {
+      list-style: none;
+    }
+
+    footer .logos .links {
+      width: 60px;
+      height: 60px;
+      background-color: #fff;
+      text-align: center;
+      line-height: 60px;
+      font-size: 24px;
+      display: block;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      border: 3px solid #fff;
+      z-index: 1;
+      transition: transform 0.3s;
+    }
+
+    footer .logos .links .icon {
+      position: relative;
+      color: #262626;
+      transition: .5s;
+      z-index: 3;
+    }
+
+    footer .logos .links:hover .icon {
+      color: #fff;
+      transform: rotateY(360deg);
+    }
+
+    footer .logos .links:before {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transition: .5s;
+      z-index: 2;
+    }
+
+    footer .logos .links:hover:before {
+      top: 0;
+    }
+
+    footer .logos .list:nth-child(1) .links:before {
+      background: #3b5999;
+      /* Facebook */
+    }
+
+    footer .logos .list:nth-child(2) .links:before {
+      background: #E4405F;
+      /* Instagram */
+    }
+
+    footer .logos .list:nth-child(3) .links:before {
+      background: #55acee;
+      /* Twitter */
+    }
+
+    footer .logos .list:nth-child(4) .links:before {
+      background: #55acee;
+      /* Twitter */
+    }
+
+
+
+
+
+/* ===== MOBILE ===== */
+  @media(max-width:900px){
+  nav ul{
+    display:none
+  } */
+
+  .menu-btn{
+    display:block;
+  }
+
+  .sidebar{
+    left:-100%;
+  }
+
+  #menu-toggle:checked ~ .sidebar{
+    left:0;
+  }
+
+  #menu-toggle:checked ~ .sidebar .sidebar-close{
+    display:block;
+  }
+
+  .main{
+    margin-left:0;
+    padding:20px;
+  }
+} 
+ @media(max-width:900px){
+  nav{
+    padding:0 20px;
+  }
+
+  nav ul{
+    display:none;
+  }
+
+  .menu-btn{
+    display:block;
+  }
+
+  .sidebar{
+    left:-100%;
+  }
+
+  #menu-toggle:checked ~ .sidebar{
+    left:0;
+  }
+
+  .main{
+    margin-left:0;
+    padding:20px;
+  }
+}
+@media(max-width:900px){
+
+  /* existing styles remain */
+
+  #menu-toggle:checked ~ .main{
+    transform: translateX(240px);
+  }
+
+  .main{
+    transition: 0.3s ease;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">
+    <img src="../assets/finallogo.png" alt="Rural Governance Logo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(10,108,255,0.4);">
+  </div>
+  <ul>
+    <li><a href="/home.html"><i class="fa-regular fa-house"></i> Home</a></li>
+    <li><a href=""><i class="fa-solid fa-phone"></i> Contact</a></li>
+    <li><a href="#"><i class="fa-solid fa-circle-exclamation"></i> About</a></li>
+  </ul>
+  <button class="login_btn">
+    <a href="/home.html" class="login_anchor">
+      Log out 👤
+    </a>
+  </button>
+</nav>
+
+<input type="checkbox" id="menu-toggle">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <label for="menu-toggle" class="sidebar-close">✖</label>
+  <!-- <div class="logo">
+    <img src="/assets/logo.avif" alt="Logo">
+  </div> -->
+  
+  <a href="./admin_dashboard.html"><i class="fa-solid fa-file-circle-exclamation"></i> Dashboard</a>
+  <a href="./complaints.html"><i class="fa-solid fa-file-circle-exclamation"></i> Complaints</a>
+  <a href="./departmental_complaints.html"><i class="fa-solid fa-building"></i> Departments</a>
+  <!-- <a class="active" href="#"><i class="fa-solid fa-chart-pie"></i> Analytics</a> -->
+  <a href="./system.html"><i class="fa-solid fa-gear"></i> System</a>
+  <a class="active" href="./officers_list.html"><i class="fa-solid fa-user"></i> Officers</a>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="main-header">
+    <label for="menu-toggle" class="menu-btn">☰</label>
+    <h1>Admin Dashboard</h1>
+  </div>
+
+  <div class="cards">
+    <div class="card">Total Complaints<br><b>7,956</b></div>
+    <div class="card">Pending<br><b>1,432</b></div>
+    <div class="card">Resolved<br><b>6,210</b></div>
+    <div class="card">Departments<br><b>42</b></div>
+  </div>
+
+  <div class="charts-wrapper">
+    <div class="chart-container">
+      <canvas id="monthlyChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="yearlyChart"></canvas>
+    </div>
+  </div>
+
+  <div class="charts-wrapper">
+    <div class="chart-container">
+      <canvas id="yearlyDeptChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="deptChart"></canvas>
+    </div>
+  </div>
+</div>
+
+
+<!-- ************FOOTER*********** -->
+ <footer id="contact">
+    <p>© 2026 Smart Civic Portal | Designed for Digital India </p>
+    <p>Email Id: Ruralgovernance@gmail.com</p>
+
+    <ul class=" logos ">
+      <li class="list">
+        <a href="#" class="links">
+          <i class="fab fa-facebook-f icon"></i> </a>
+      </li>
+      <li class="list">
+        <a href="#" class="links"><i class="fab fa-twitter icon"></i></a>
+      </li>
+      <li class="list">
+        <a href="#" class="links"><i class="fab fa-linkedin-in icon"></i></a>
+      </li>
+      <li class="list">
+        <a href="#" class="links"><i class="fab fa-google-plus-g icon"></i></a>
+      </li>
+    </ul>
+  </footer>
+
+<script>
+const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
+new Chart(monthlyCtx,{
+  type:'bar',
+  data:{
+    labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    datasets:[
+      {
+        label:'Monthly Registered Complaints',
+        data:[120,150,180,140,200,170,160,190,210,180,220,200],
+        backgroundColor:'#0a6cff'
+      },
+      {
+        label:'Monthly Resolved Complaints',
+        data:[100,130,160,120,180,150,140,170,190,160,200,180],
+        backgroundColor:'#ff6b6b'
+      }
+    ]
+  },
+  options:{
+    scales:{
+      y:{beginAtZero:true}
+    },
+    responsive:true,
+    plugins:{
+      legend:{
+        position:'top'
+      }
+    }
+  }
+});
+
+const yearlyCtx = document.getElementById('yearlyChart').getContext('2d');
+new Chart(yearlyCtx,{
+  type:'bar',
+  data:{
+    labels:['2020','2021','2022','2023','2024','2025'],
+    datasets:[
+      {
+        label:'Yearly Registered Complaints',
+        data:[1500,1800,2000,2200,1900,2100],
+        backgroundColor:'#00c49f'
+      },
+      {
+        label:'Yearly Resolved Complaints',
+        data:[1300,1600,1800,2000,1700,1900],
+        backgroundColor:'#ffa726'
+      }
+    ]
+  },
+  options:{
+    scales:{
+      y:{beginAtZero:true}
+    },
+    responsive:true,
+    plugins:{
+      legend:{
+        position:'top'
+      }
+    }
+  }
+});
+
+const yearlyDeptCtx = document.getElementById('yearlyDeptChart').getContext('2d');
+new Chart(yearlyDeptCtx,{
+  type:'bar',
+  data:{
+    labels:['Health','Education','Electricity','Water','Irrigation','Road','Sanitation','Transport'],
+    datasets:[
+      {
+        label:'Department wise Registered Complaints for the month of April 2025',
+        data:[950,720,840,1080,600,780,540,660],
+        backgroundColor:'#42a5f5'
+      },
+      {
+        label:'Department wise Resolved Complaints for the month of April 2025',
+        data:[900,680,800,1020,560,740,500,625],
+        backgroundColor:'#66bb6a'
+      }
+    ]
+  },
+  options:{
+    scales:{
+      y:{beginAtZero:true}
+    },
+    responsive:true,
+    plugins:{
+      legend:{
+        position:'top'
+      }
+    }
+  }
+});
+
+const deptCtx = document.getElementById('deptChart').getContext('2d');
+new Chart(deptCtx,{
+  type:'bar',
+  data:{
+    labels:['Health','Education','Electricity','Water','Irrigation','Road','Sanitation','Transport'],
+    datasets:[
+      {
+        label:'Department wise Registered Complaints in the year 2025',
+        data:[95,78,87,110,62,80,55,68],
+        backgroundColor:'#42a5f5'
+      },
+      {
+        label:'Department wise Resolved Complaints in the year 2025',
+        data:[90,70,80,105,58,75,50,65],
+        backgroundColor:'#66bb6a'
+      }
+    ]
+  },
+  options:{
+    scales:{
+      y:{beginAtZero:true}
+    },
+    responsive:true,
+    plugins:{
+      legend:{
+        position:'top'
+      }
+    }
+  }
+});
+</script>
+
+</body>
+</html>

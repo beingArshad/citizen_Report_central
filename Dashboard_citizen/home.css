@@ -1,0 +1,775 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary: #667eea;
+  --secondary: #764ba2;
+  --primary-gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  --hover-gradient: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+  --bg-color: #f0f4f8;
+  --text-dark: #1e293b;
+  --text-light: #64748b;
+  --white: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+  --glass-blur: blur(12px);
+  --radius: 16px;
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Global Reset & Scrollbar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Saira', sans-serif;
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Slim Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary);
+}
+
+/* ==========================================================================
+   Navigation Bar (Glassmorphism) exactly matching citizen.css
+   ========================================================================== */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-container b {
+  font-size: 20px;
+  font-weight: 700;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+nav ul {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 600;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+nav ul li a i {
+  font-size: 18px;
+  color: var(--primary);
+  transition: var(--transition);
+}
+
+nav ul li a:hover {
+  background: rgba(102, 126, 234, 0.1);
+  color: var(--primary);
+}
+
+nav ul li a:hover i {
+  transform: scale(1.1);
+}
+
+.nav-toggle {
+  display: none;
+  font-size: 24px;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+/* Specific buttons for logged out user */
+.login_btn {
+  background: var(--primary-gradient);
+  color: var(--white) !important;
+  border: none;
+  border-radius: 25px !important;
+  padding: 8px 20px !important;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+.login_btn i {
+  color: var(--white) !important;
+}
+.login_btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+  background: var(--hover-gradient);
+  color: var(--white) !important;
+}
+
+.language-selector select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--primary);
+  background: transparent;
+  color: var(--text-dark);
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+@media (max-width: 992px) {
+  nav ul {
+    position: fixed;
+    top: 70px;
+    right: -100%;
+    width: 250px;
+    height: calc(100vh - 70px);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    flex-direction: column;
+    padding: 30px;
+    transition: var(--transition);
+    border-left: 1px solid var(--glass-border);
+    gap: 15px;
+  }
+  nav ul.active {
+    right: 0;
+  }
+  .nav-toggle {
+    display: block;
+  }
+}
+
+/* ==========================================================================
+   Hero Video Section (Glassmorphism style)
+   ========================================================================== */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  overflow: hidden;
+  box-shadow: var(--glass-shadow);
+  background: #111;
+}
+
+/* ==========================================================================
+   Hero Carousel
+   ========================================================================== */
+.carousel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.carousel-inner {
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.carousel-item.active {
+  opacity: 1;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.8);
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  z-index: 10;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+}
+
+.carousel-control:hover {
+  background: var(--primary);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-control.prev { left: 20px; }
+.carousel-control.next { right: 20px; }
+
+/* Carousel Dots */
+.carousel-dots {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  border: 2px solid rgba(255,255,255,0.8);
+}
+
+.dot.active {
+  background: var(--white);
+  transform: scale(1.3);
+}
+
+.hero-overlay-card {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 50px;
+  border-radius: var(--radius);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  text-align: center;
+  max-width: 700px;
+  width: 90%;
+  animation: slideUp 1s ease forwards;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.hero-overlay-card h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-overlay-card p {
+  font-size: 1.2rem;
+  color: var(--text-dark);
+  margin-bottom: 30px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  background: var(--primary-gradient);
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn:hover {
+  background: var(--hover-gradient);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  box-shadow: none;
+}
+.btn-outline:hover {
+  background: var(--primary);
+  color: var(--white);
+}
+
+/* ==========================================================================
+   Features Section (Glassmorphism Cards)
+   ========================================================================== */
+.features {
+  padding: 80px 5%;
+  text-align: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 50px;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+@media (max-width: 1024px) {
+  .feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 40px 20px;
+  box-shadow: var(--glass-shadow);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+  border-color: var(--primary);
+}
+
+.card .icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: var(--transition);
+}
+
+.card:hover .icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.card p {
+  font-size: 1.05rem;
+  color: var(--text-light);
+}
+
+/* ==========================================================================
+   Timeline Section
+   ========================================================================== */
+.timeline-section {
+  padding: 80px 5%;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+  text-align: center;
+}
+
+.timeline-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  flex: 1;
+  min-width: 250px;
+  background: var(--white);
+  padding: 25px;
+  border-radius: var(--radius);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  border: 1px solid var(--glass-border);
+  transition: var(--transition);
+}
+
+.timeline-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.timeline-marker {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--primary-gradient);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.timeline-content h3 {
+  font-size: 1.2rem;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.timeline-content p {
+  font-size: 1rem;
+  color: var(--text-light);
+  text-align: left;
+}
+
+/* ==========================================================================
+   Stats Section
+   ========================================================================== */
+.stats-section {
+  padding: 80px 5%;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+}
+
+.stat {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 30px;
+  box-shadow: var(--glass-shadow);
+  transition: var(--transition);
+}
+
+.stat:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+}
+
+.stat .number {
+  font-size: 3rem;
+  font-weight: 800;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 10px 0;
+}
+
+.stat small {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+.stat .label {
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Impact Comparison Slider
+   ========================================================================== */
+.impact-section {
+  padding: 80px 5%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.comparison-slider {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--glass-shadow);
+  border: 4px solid var(--white);
+}
+
+.comparison-slider img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.comparison-slider .img-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%; /* Initial split */
+  height: 100%;
+  overflow: hidden;
+  border-right: 2px solid var(--white);
+  z-index: 2;
+}
+
+.comparison-slider .img-wrapper img {
+  width: 1000px; /* Match max-width of container approximately to prevent squash, or use object-fit */
+  /* Wait, object-fit: cover on absolute img inside wrapper will resize based on wrapper width, which breaks alignment.
+     To fix: width of img should be 100vw or fixed to container.
+     Better approach: img width = container width. Since container is 100% of max 1000px, 
+     we can use min-width: 1000px but it breaks on mobile.
+     Best approach: object-position or use width: 100% on a fixed size container. 
+     Wait, actually `width: auto; min-width: 100%;` or JS can calculate it.
+     Simpler CSS-only way: */
+}
+/* Fixed CSS for before image so it doesn't squash */
+.comparison-slider .img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left center;
+}
+/* The above object-fit on a changing width container will still shift the image center. 
+   To perfectly align, the img must be the exact width of the PARENT container (.comparison-slider). */
+.comparison-slider .img-wrapper img {
+  width: 1000px; /* Max width */
+  max-width: none;
+}
+@media (max-width: 1000px) {
+  .comparison-slider .img-wrapper img {
+    width: 90vw; /* Approx container width */
+  }
+}
+
+.comparison-slider .slider {
+  position: absolute;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  outline: none;
+  margin: 0;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  cursor: ew-resize;
+}
+
+.comparison-slider .slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 4px;
+  height: 500px;
+  background: transparent;
+  cursor: ew-resize;
+}
+
+.slider-button {
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 18px);
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  background: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.comparison-slider .label {
+  position: absolute;
+  top: 20px;
+  padding: 8px 15px;
+  background: rgba(0,0,0,0.6);
+  color: var(--white);
+  font-weight: 600;
+  border-radius: 20px;
+  z-index: 3;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.before-label { left: 20px; }
+.after-label { right: 20px; }
+
+/* ==========================================================================
+   Footer exactly matching citizen.css
+   ========================================================================== */
+footer {
+  background: var(--text-dark);
+  color: var(--white);
+  padding: 60px 5% 20px;
+  margin-top: auto;
+  border-top: 5px solid var(--primary);
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+}
+
+.footer-info {
+  flex: 1;
+  min-width: 300px;
+}
+
+.footer-info h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: var(--primary);
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.footer-info p {
+  color: #cbd5e1;
+  margin-bottom: 20px;
+  font-size: 1.05rem;
+}
+
+.contact-info p {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-info i {
+  color: var(--primary);
+}
+
+.footer-social {
+  flex: 0 0 300px;
+}
+
+.footer-social h4 {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: var(--white);
+  position: relative;
+  display: inline-block;
+}
+
+.footer-social h4::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 50%;
+  height: 2px;
+  background: var(--primary);
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-links a {
+  width: 45px;
+  height: 45px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  text-decoration: none;
+  transition: var(--transition);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.social-links a:hover {
+  background: var(--primary);
+  transform: translateY(-5px);
+  border-color: var(--primary);
+  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
