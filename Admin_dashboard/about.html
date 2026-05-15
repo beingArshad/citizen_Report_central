@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About Us - Team</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<style>
+
+:root{
+  --blue:#0a6cff;
+  --black:#0f172a;
+  --white:#ffffff;
+
+  --bg: #0d0d0d;
+  --card: #1c1c1c;
+  --border: rgba(255,255,255,0.08);
+  --border-hover: rgba(255,255,255,0.18);
+  --text-primary: #f0ede8;
+  --text-secondary: #9a9590;
+  --pink: #d4537e;
+  --teal: #3eb89a;
+  --amber: #e0943a;
+}
+
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Segoe UI, Arial, sans-serif;
+}
+
+body{
+  background: var(--bg);
+  color: white;
+  overflow-x: hidden;
+}
+
+/* NAVBAR */
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:70px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 40px;
+  background:white;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  z-index:3000;
+}
+
+nav ul{
+  display:flex;
+  gap:24px;
+  list-style:none;
+}
+
+nav ul li a{
+  text-decoration:none;
+  color:#000;
+  font-weight:500;
+}
+
+nav ul li a:hover{
+  color:var(--blue);
+}
+
+.login_btn{
+  padding:10px 18px;
+  border-radius:80px;
+  border:1px solid black;
+  background:transparent;
+  cursor:pointer;
+}
+
+.login_btn:hover{
+  background:var(--blue);
+}
+
+.login_anchor{
+  text-decoration:none;
+  color:black;
+}
+
+.login_btn:hover .login_anchor{
+  color:white;
+}
+
+/* SIDEBAR */
+.sidebar{
+  width:240px;
+  height:100vh;
+  background:var(--black);
+  color:white;
+  padding:25px 20px;
+  position:fixed;
+  top:70px;
+  left:0;
+  z-index:1000;
+}
+
+.sidebar a{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:white;
+  text-decoration:none;
+  padding:12px;
+  border-radius:8px;
+  margin-bottom:12px;
+  transition:0.3s;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+  background:var(--blue);
+  transform:translateX(6px);
+}
+
+/* MAIN */
+.main{
+  margin-left:240px;
+  margin-top:70px;
+  padding:50px 30px;
+  min-height:100vh;
+}
+
+/* HERO */
+.hero{
+  text-align:center;
+  margin-bottom:60px;
+}
+
+.eyebrow{
+  color:var(--blue);
+  font-size:14px;
+  letter-spacing:3px;
+  margin-bottom:10px;
+  text-transform:uppercase;
+}
+
+.hero-title{
+  font-size:52px;
+  margin-bottom:20px;
+  color:var(--blue);
+}
+
+.hero-title span{
+  color:white;
+}
+
+.hero-desc{
+  max-width:700px;
+  margin:auto;
+  color:var(--text-secondary);
+  line-height:1.8;
+}
+
+/* TEAM GRID */
+.team-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
+}
+
+/* CARD */
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+  border-color:var(--border-hover);
+}
+
+.card-img{
+  width:100%;
+  height:220px;
+  overflow:hidden;
+}
+
+.card-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:0.4s;
+}
+
+.card:hover .card-img img{
+  transform:scale(1.05);
+}
+
+.card-body{
+  padding:22px;
+}
+
+.card-name{
+  font-size:22px;
+  margin-bottom:5px;
+}
+
+.card-role{
+  font-size:12px;
+  text-transform:uppercase;
+  color:var(--blue);
+  margin-bottom:14px;
+  letter-spacing:1px;
+}
+
+.card-bio{
+  font-size:14px;
+  color:var(--text-secondary);
+  line-height:1.7;
+  margin-bottom:18px;
+}
+
+.card-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:18px;
+}
+
+.tag{
+  padding:5px 10px;
+  border-radius:20px;
+  background:#2a2a2a;
+  font-size:11px;
+}
+
+.card-socials{
+  display:flex;
+  gap:10px;
+}
+
+.social-link{
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#2a2a2a;
+  color:white;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+.social-link:hover{
+  background:var(--blue);
+}
+
+/* *******FOOTER********** */
+/* **********FOOTER************ */
+footer {
+      background: var(--black);
+      color: white;
+      padding: 40px;
+      text-align: center;
+      margin-top: 240px;
+
+    }
+
+    footer .logos {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    footer .logos .list {
+      list-style: none;
+    }
+
+    footer .logos .links {
+      width: 60px;
+      height: 60px;
+      background-color: #fff;
+      text-align: center;
+      line-height: 60px;
+      font-size: 24px;
+      display: block;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      border: 3px solid #fff;
+      z-index: 1;
+      transition: transform 0.3s;
+      color: black;
+    }
+
+    footer .logos .links .icon {
+      position: relative;
+      color: #262626;
+      transition: .5s;
+      z-index: 3;
+    }
+
+    footer .logos .links:hover .icon {
+      color: #fff;
+      transform: rotateY(360deg);
+    }
+
+    footer .logos .links:before {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transition: .5s;
+      z-index: 2;
+    }
+
+    footer .logos .links:hover:before {
+      top: 0;
+    }
+
+    footer .logos .list:nth-child(1) .links:before {
+      background: #3b5999;
+      /* Facebook */
+    }
+
+    footer .logos .list:nth-child(2) .links:before {
+      background: #E4405F;
+      /* Instagram */
+    }
+
+    footer .logos .list:nth-child(3) .links:before {
+      background: #55acee;
+      /* Twitter */
+    }
+
+    footer .logos .list:nth-child(4) .links:before {
+      background: #55acee;
+      /* Twitter */
+    }
+
+ 
+
+   
+/* MOBILE */
+@media(max-width:900px){
+
+  .sidebar{
+    display:none;
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  nav{
+    padding:0 20px;
+  }
+
+  nav ul{
+    display:none;
+  }
+
+  .hero-title{
+    font-size:38px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+
+  <div class="logo">
+    <img src="/citizen_Report_central/assets/logo.png" alt="Logo" width="70px">
+  </div>
+
+  <ul>
+    <li><a href="/citizen_Report_central/index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+    <li><a href="#contact"><i class="fa-solid fa-phone"></i> Contact</a></li>
+    <li><a href="#"><i class="fa-solid fa-circle-exclamation"></i> About</a></li>
+  </ul>
+
+  <button class="login_btn">
+    <a href="/citizen_Report_central/index.html" class="login_anchor">Log out 👤</a>
+  </button>
+
+</nav>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <a href="admin_dashboard.html"><i class="fa fa-dashboard"></i> Dashboard</a>
+  <a href="complaints.html"><i class="fa fa-file"></i> Complaints</a>
+  <a href="departmental_complaints.html"><i class="fa fa-building"></i> Departments</a>
+  <a href="system.html"><i class="fa fa-cog"></i> Settings</a>
+  <a href="officers_list.html"><i class="fa fa-users"></i> Officers</a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- HERO -->
+  <header class="hero">
+    <p class="eyebrow">Our People</p>
+
+    <h1 class="hero-title">
+      Meet the <span>Team</span>
+    </h1>
+
+    <p class="hero-desc">
+      Collaboratively developed Ctizen Report Central, focusing on UI design,
+      dashboard development, complaint tracking, and creating a user-friendly
+      citizen grievance management system.
+    </p>
+  </header>
+
+  <!-- TEAM -->
+  <section class="team-grid">
+
+    <!-- CARD 1 -->
+    <article class="card">
+      <div class="card-img">
+        <img src="/citizen_Report_central/assets/vikram.jpeg.jpeg">
+      </div>
+
+      <div class="card-body">
+        <h2 class="card-name">Vikram</h2>
+        <p class="card-role">Team Lead</p>
+
+        <div class="card-tags">
+          <span class="tag">Strategy</span>
+          <span class="tag">Leadership</span>
+        </div>
+
+        <p class="card-bio">
+          Developed the Admin Dashboard, including complaint monitoring and system administration features.
+        </p>
+
+        <div class="card-socials">
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- CARD 2 -->
+    <article class="card">
+      <div class="card-img">
+        <img src="https://i.pravatar.cc/400?img=12">
+      </div>
+
+      <div class="card-body">
+        <h2 class="card-name">Arshad Patan Khan</h2>
+        <p class="card-role">Team Member</p>
+
+        <div class="card-tags">
+          <span class="tag">Designing</span>
+          <span class="tag">Analysis</span>
+        </div>
+
+        <p class="card-bio">
+          Developed the Citizen Dashboard for complaint submission and real-time issue tracking.
+        </p>
+
+        <div class="card-socials">
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+          <a href="#" class="social-link"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- CARD 3 -->
+    <article class="card">
+      <div class="card-img">
+        <img src="https://i.pravatar.cc/400?img=5">
+      </div>
+
+      <div class="card-body">
+        <h2 class="card-name"></h2>
+        <p class="card-role">Team Member</p>
+
+        <div class="card-tags">
+          <span class="tag">UX</span>
+          <span class="tag">Systems</span>
+        </div>
+
+        <p class="card-bio">
+          Built the Officer Dashboard for complaint verification, management, and resolution.
+        </p>
+
+        <div class="card-socials">
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-dribbble"></i></a>
+          <a href="#" class="social-link"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+    </article>
+
+    <!-- CARD 4 -->
+    <article class="card">
+      <div class="card-img">
+        <img src="https://i.pravatar.cc/400?img=68">
+      </div>
+
+      <div class="card-body">
+        <h2 class="card-name">Keshavaram</h2>
+        <p class="card-role">Team Member</p>
+
+        <div class="card-tags">
+          <span class="tag">Brand</span>
+          <span class="tag">Content</span>
+          <span class="tag">Analysis</span>
+        </div>
+
+        <p class="card-bio">
+          Designed and implemented the Home Page, Login Page, Registration Pages, and About Page with a responsive and user-friendly interface.
+        </p>
+
+        <div class="card-socials">
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+
+  <p>© 2026 Smart Civic Portal | Designed for Digital India</p>
+  <p>Email Id: Ruralgovernance@gmail.com</p>
+
+  <ul class="logos">
+    <li class="list">
+      <a href="#" class="links">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+
+    <li class="list">
+      <a href="#" class="links">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+
+    <li class="list">
+      <a href="#" class="links">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+
+    <li class="list">
+      <a href="#" class="links">
+        <i class="fab fa-google-plus-g"></i>
+      </a>
+    </li>
+  </ul>
+
+</footer>
+
+</body>
+</html>
