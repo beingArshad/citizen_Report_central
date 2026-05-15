@@ -437,7 +437,7 @@
   left:0;
   
   width:100%;
-  height:var(--nav-height);
+  height:70px;
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -776,14 +776,12 @@ nav ul li a:hover{
   <script>
     const searchInput = document.getElementById('searchInput');
     const deptFilter = document.getElementById('deptFilter');
-    const statusFilter = document.getElementById('statusFilter');
     const table = document.getElementById('complaintTable');
     const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
     function filterTable() {
       const searchText = searchInput.value.toLowerCase();
-      const deptValue = deptFilter.value;
-      const statusValue = statusFilter.value;
+      const deptValue = deptFilter.value.toLowerCase();
 
       for (let i = 0; i < rows.length; i++) {
         const row = rows[i];
@@ -792,9 +790,7 @@ nav ul li a:hover{
         const id = cells[0].textContent.toLowerCase();
         const title = cells[1].textContent.toLowerCase();
         const category = cells[2].textContent.toLowerCase();
-        const datetime = cells[3].textContent.toLowerCase();
         const location = cells[4].textContent.toLowerCase();
-        const visibleStatus = cells[6] ? cells[6].textContent.toLowerCase() : '';
 
         const matchesSearch = searchText === '' ||
           id.includes(searchText) ||
@@ -802,10 +798,9 @@ nav ul li a:hover{
           category.includes(searchText) ||
           location.includes(searchText);
 
-        const matchesDept = deptValue === '' || category === deptValue.toLowerCase();
-        const matchesStatus = statusValue === '' || visibleStatus === statusValue.toLowerCase();
+        const matchesDept = deptValue === '' || category === deptValue;
 
-        if (matchesSearch && matchesDept && matchesStatus) {
+        if (matchesSearch && matchesDept) {
           row.style.display = '';
         } else {
           row.style.display = 'none';
@@ -815,7 +810,6 @@ nav ul li a:hover{
 
     searchInput.addEventListener('keyup', filterTable);
     deptFilter.addEventListener('change', filterTable);
-    statusFilter.addEventListener('change', filterTable);
 
     // Add event listeners for assign buttons
     document.addEventListener('click', function(e) {

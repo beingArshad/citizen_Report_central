@@ -165,6 +165,98 @@ button:hover{
   background:#218838;
 }
 
+/* NOTIFICATION POPUP */
+.notification-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  padding: 30px;
+  min-width: 400px;
+  text-align: center;
+  z-index: 5000;
+  animation: slideIn 0.3s ease-out;
+}
+
+.notification-popup.show {
+  display: block;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.notification-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 4999;
+}
+
+.notification-overlay.show {
+  display: block;
+}
+
+.notification-icon {
+  font-size: 48px;
+  color: #28a745;
+  margin-bottom: 15px;
+}
+
+.notification-popup h3 {
+  color: #0f172a;
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+
+.notification-popup p {
+  color: #666;
+  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.notification-message {
+  background: #f4f6fb;
+  border-left: 4px solid #0a6cff;
+  padding: 15px;
+  margin-bottom: 20px;
+  text-align: left;
+  border-radius: 6px;
+  font-style: italic;
+  color: #333;
+}
+
+.notification-close-btn {
+  background: #0a6cff;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.notification-close-btn:hover {
+  background: #0856cc;
+}
+
  footer {
       background: var(--black);
       color: white;
@@ -256,7 +348,7 @@ button:hover{
 <!-- NAVBAR -->
 <nav>
   <div class="logo">
-    <img src="../assets/finallogo.png" alt="Rural Governance Logo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(10,108,255,0.4);">
+    <img src="./logo.jpg" width="70px">
   </div>
 
   <ul>
@@ -291,6 +383,20 @@ button:hover{
   </div>
 </div>
 
+<!-- NOTIFICATION POPUP -->
+<div class="notification-overlay" id="notificationOverlay"></div>
+<div class="notification-popup" id="notificationPopup">
+  <div class="notification-icon">
+    <i class="fas fa-check-circle"></i>
+  </div>
+  <h3>Notification Sent!</h3>
+  <p>The message has been successfully sent to the officer.</p>
+  <div class="notification-message">
+    <span id="notificationText"></span>
+  </div>
+  <button class="notification-close-btn" onclick="closeNotification()">Close</button>
+</div>
+
 <!-- SCRIPT -->
 <script>
 function sendNotification() {
@@ -301,18 +407,30 @@ function sendNotification() {
     return;
   }
 
-  const btn = document.querySelector("button");
-  btn.innerText = "Sent ✓";
-  btn.style.background = "#007bff";
+  // Show notification popup
+  const overlay = document.getElementById("notificationOverlay");
+  const popup = document.getElementById("notificationPopup");
+  const notificationText = document.getElementById("notificationText");
+  
+  notificationText.textContent = msg;
+  overlay.classList.add("show");
+  popup.classList.add("show");
 
   // Clear message
   document.getElementById("message").value = "";
 
-  // Reset after 2 seconds
+  // Auto-close after 5 seconds
   setTimeout(() => {
-    btn.innerText = "Send";
-    btn.style.background = "#28a745";
-  }, 2000);
+    closeNotification();
+  }, 5000);
+}
+
+function closeNotification() {
+  const overlay = document.getElementById("notificationOverlay");
+  const popup = document.getElementById("notificationPopup");
+  
+  overlay.classList.remove("show");
+  popup.classList.remove("show");
 }
 </script>
 <!-- *************FOOTER*************** -->

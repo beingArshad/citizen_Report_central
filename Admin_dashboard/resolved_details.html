@@ -29,7 +29,7 @@
   left:0;
   
   width:100%;
-  height:var(--nav-height);
+  height:70px;
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -37,6 +37,7 @@
   background:white;
   box-shadow:0 4px 12px rgba(0,0,0,0.08);
   z-index:3000;
+  
 }
 
 
@@ -139,87 +140,15 @@ nav ul li a:hover{
       background: var(--blue);
       transform: translateX(6px);
     }
-
-
-
 /* MAIN SPACE (EMPTY) */
 .main{
-  /* margin-left:220px; */
-  /* margin-top:60px; */
-  /* padding:20px; */
-  min-height:16vh;
+  margin-left:220px;
+  margin-top:20px;
+  padding:10px;
+  min-height:auto;
 }
 
-
-body{
-  font-family:Segoe UI;
-  background:#f4f6fb;
-  /* padding:20px; */
-}
-
-.container{
-  max-width:800px;
-  margin:auto;
-  background:white;
-  padding:25px;
-  border-radius:12px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
-}
- .back-link { 
-   display: inline-block;
-   margin-bottom: 20px;
-   color: #1d4ed8;
-   text-decoration: none; 
-   font-weight: 600;
-}
-
-h2{
-  margin-bottom:20px;
-}
-
-/* INFO */
-.info{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-  margin-bottom:25px;
-}
-
-.info div{
-  background:#eef3ff;
-  padding:12px;
-  border-radius:8px;
-}
-
-/* SECTIONS */
-.section{
-  margin-bottom:20px;
-}
-
-.section h3{
-  margin-bottom:10px;
-}
-
-/* BOX */
-.box{
-  background:#f9fafc;
-  padding:15px;
-  border-radius:10px;
-}
-
-/* LIST */
-ul{
-  padding-left:20px;
-}
-
-li{
-  margin-bottom:8px;
-}
-
-
-    /* _______footer css______ */
-
-    footer {
+ footer {
       background: var(--black);
       color: white;
       padding: 40px;
@@ -301,6 +230,7 @@ li{
       background: #55acee;
       /* Twitter */
     }
+    
 
 /* MOBILE */
 @media(max-width:900px){
@@ -320,6 +250,79 @@ li{
     display:none;
   }
 }
+
+/* container css */
+
+body{
+  font-family:Segoe UI;
+  background:#f4f6fb;
+  margin:0;
+  padding:0;
+}
+
+.container{
+  max-width:800px;
+  margin-left: 390px;
+  margin-top: 70px;
+  background:white;
+  padding:25px;
+  
+  border-radius:12px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+ .back-link { 
+   display: inline-block;
+   margin-bottom: 20px;
+   color: #1d4ed8;
+   text-decoration: none; 
+   font-weight: 600;
+}
+
+h2{
+  margin-bottom:20px;
+}
+
+/* INFO */
+.info{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.info div{
+  background:#eef3ff;
+  padding:12px;
+  border-radius:8px;
+}
+
+/* SECTIONS */
+.section{
+  margin-bottom:20px;
+}
+
+.section h3{
+  margin-bottom:10px;
+}
+
+/* BOX */
+.box{
+  background:#f9fafc;
+  padding:15px;
+  border-radius:10px;
+}
+
+/* LIST */
+ul{
+  padding-left:20px;
+}
+
+li{
+  margin-bottom:8px;
+}
+
+
+
 </style>
 </head>
 
@@ -331,7 +334,7 @@ li{
 
 
   <div class="logo">
-      <img src="./logo.jpg" alt="Logo" width="70px" height="">
+      <img src="./Project_logo.jpg" alt="Logo" width="70px" height="">
   </div>
   <ul>
     <li><a href="/home.html"><i class="fa-regular fa-house"></i> Home</a></li>
@@ -355,12 +358,6 @@ li{
   <a href="officers_list.html"><i class="fa fa-cog"></i> Officers</a>
 </div>
 
-<!-- MAIN (EMPTY SPACE) -->
-<div class="main">
-    
-</div>
-
-
 
 <div class="container">
 <a href="resolved.html" class="back-link"><i class="fa fa-arrow-left"></i> Back to Resolved Complaints</a>
@@ -380,7 +377,7 @@ li{
 
 <!-- PROCESS -->
 <div class="section">
-  <h3>🛠️ Process Followed</h3>
+  <h3> Process Followed</h3>
   <div class="box">
     <ul>
       <li>Visited the location</li>
@@ -394,7 +391,7 @@ li{
 
 <!-- REPORTS -->
 <div class="section">
-  <h3>📄 Reports Submitted</h3>
+  <h3> Reports Submitted</h3>
   <div class="box">
     <ul>
       <li>Inspection Report</li>
@@ -406,7 +403,7 @@ li{
 
 <!-- FINAL SUMMARY -->
 <div class="section">
-  <h3>✅ Completion Summary</h3>
+  <h3> Completion Summary</h3>
   <div class="box">
     <p>
       The issue has been resolved successfully. The pipeline was repaired.
@@ -415,9 +412,14 @@ li{
   </div>
 </div>
 
+
 </div>
 
 
+<!-- MAIN (EMPTY SPACE) -->
+<div class="main">
+    
+</div>
 
 <!-- FOOTER -->
 <footer id="contact">
@@ -440,7 +442,6 @@ li{
       </li>
     </ul>
   </footer>
-
 
 </body>
 </html>
