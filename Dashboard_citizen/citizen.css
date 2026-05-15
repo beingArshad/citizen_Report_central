@@ -17,7 +17,7 @@
   --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* Global Reset & Scrollbar */
+
 * {
   margin: 0;
   padding: 0;
@@ -49,10 +49,7 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--secondary);
 }
-
-/* ==========================================================================
-   Navigation Bar (Glassmorphism)
-   ========================================================================== */
+/* navbar */
 nav {
   display: flex;
   justify-content: space-between;
@@ -123,9 +120,8 @@ nav ul li a:hover i {
   cursor: pointer;
 }
 
-/* ==========================================================================
-   Hero Section & Carousel
-   ========================================================================== */
+
+ /* corousel */
 .hero {
   width: 100%;
   position: relative;
@@ -166,7 +162,7 @@ nav ul li a:hover i {
   object-fit: cover;
 }
 
-/* Dark overlay for better text contrast if needed */
+
 .slide::after {
   content: "";
   position: absolute;
@@ -250,9 +246,7 @@ nav ul li a:hover i {
   box-shadow: 0 0 10px rgba(255,255,255,0.8);
 }
 
-/* ==========================================================================
-   Cards Section (Glassmorphism + Gradient)
-   ========================================================================== */
+/* cards */
 .main-container {
   flex: 1;
   padding: 0 5%;
@@ -344,9 +338,7 @@ nav ul li a:hover i {
   margin-top: 10px;
 }
 
-/* ==========================================================================
-   Service Level Agreements Section
-   ========================================================================== */
+
 .services-section {
   text-align: center;
   margin: 60px 0;
@@ -420,9 +412,6 @@ nav ul li a:hover i {
   color: var(--text-dark);
 }
 
-/* ==========================================================================
-   Data Tables (Glassmorphism)
-   ========================================================================== */
 .page-header {
   text-align: center;
   margin: 40px 0;
@@ -526,9 +515,6 @@ tbody tr:hover {
   color: var(--white);
 }
 
-/* ==========================================================================
-   Forms (Post Complaint, Rate Service)
-   ========================================================================== */
 .form-container {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
@@ -653,9 +639,6 @@ input:focus, textarea:focus, select:focus {
   100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
 }
 
-/* ==========================================================================
-   Profile Layout
-   ========================================================================== */
 .profile-container {
   display: flex;
   gap: 40px;
@@ -730,9 +713,6 @@ input:focus, textarea:focus, select:focus {
   color: var(--text-dark);
 }
 
-/* ==========================================================================
-   Modals
-   ========================================================================== */
 .modal {
   display: none;
   position: fixed;
@@ -786,9 +766,7 @@ input:focus, textarea:focus, select:focus {
   color: var(--text-dark);
 }
 
-/* ==========================================================================
-   Footer
-   ========================================================================== */
+
 footer {
   background: var(--text-dark);
   color: var(--white);
@@ -893,9 +871,7 @@ footer {
   font-size: 0.9rem;
 }
 
-/* ==========================================================================
-   Responsive
-   ========================================================================== */
+
 @media (max-width: 992px) {
   .profile-container {
     flex-direction: column;
