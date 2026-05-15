@@ -352,74 +352,6 @@
       background: #e2e8f0;
     }
 
-    /* ===================== ROLE SELECTOR ===================== */
-    .role-selector {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .role-card {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      padding: 12px 8px;
-      border: 2px solid #e2e8f0;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: var(--transition);
-      background: #f8fafc;
-      user-select: none;
-    }
-
-    .role-card i {
-      font-size: 1.4rem;
-      color: var(--text-light);
-      transition: var(--transition);
-    }
-
-    .role-card span {
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--text-light);
-      transition: var(--transition);
-    }
-
-    .role-card:hover {
-      border-color: var(--primary);
-      background: rgba(102, 126, 234, 0.05);
-    }
-
-    .role-card.active {
-      border-color: var(--primary);
-      background: linear-gradient(135deg, rgba(102,126,234,0.12), rgba(118,75,162,0.08));
-      box-shadow: 0 4px 14px rgba(102,126,234,0.2);
-    }
-
-    .role-card.active i { color: var(--primary); }
-    .role-card.active span { color: var(--primary); }
-
-    /* Credential hint */
-    .cred-hint {
-      background: linear-gradient(135deg, #f0f4ff, #faf5ff);
-      border: 1px solid #d0d9ff;
-      border-radius: 10px;
-      padding: 10px 14px;
-      margin-bottom: 18px;
-      font-size: 0.82rem;
-      color: #4338ca;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .cred-hint i { font-size: 0.9rem; flex-shrink: 0; }
-    .cred-hint strong { font-weight: 700; }
-
     /* Responsive */
     @media (max-width: 768px) {
       .auth-split { flex-direction: column; max-width: 480px; }
@@ -472,29 +404,7 @@
         <!-- LOGIN FORM -->
         <form id="form-login" class="form-section active" onsubmit="handleLogin(event)">
           <div class="form-title">Welcome Back!</div>
-          <div class="form-subtitle">Select your role and login to your dashboard.</div>
-
-          <!-- Role Selector -->
-          <div class="role-selector">
-            <div class="role-card active" id="role-citizen" onclick="selectRole('citizen')">
-              <i class="fa-solid fa-user-circle"></i>
-              <span>Citizen</span>
-            </div>
-            <div class="role-card" id="role-officer" onclick="selectRole('officer')">
-              <i class="fa-solid fa-shield-halved"></i>
-              <span>Officer</span>
-            </div>
-            <div class="role-card" id="role-admin" onclick="selectRole('admin')">
-              <i class="fa-solid fa-user-tie"></i>
-              <span>Admin</span>
-            </div>
-          </div>
-
-          <!-- Credential Hint -->
-          <div class="cred-hint" id="credHint">
-            <i class="fa-solid fa-circle-info"></i>
-            <span id="credHintText">Enter your <strong>citizen</strong> credentials to access the Citizen Dashboard.</span>
-          </div>
+          <div class="form-subtitle">Enter your credentials to access your dashboard.</div>
 
           <div class="input-group">
             <label>Username / Email</label>
@@ -518,7 +428,7 @@
           </div>
 
           <button type="submit" class="auth-submit" id="loginBtn">
-            <i class="fa-solid fa-right-to-bracket"></i>&nbsp; Login as Citizen
+            <i class="fa-solid fa-right-to-bracket"></i>&nbsp; Login to Dashboard
           </button>
           <div class="form-footer">
             <a href="#">Forgot Password?</a> &nbsp;·&nbsp;
@@ -601,7 +511,6 @@
     /* ============================================================
        STATE
     ============================================================ */
-    let selectedRole = 'citizen';
 
     const ROLE_CONFIG = {
       citizen: {
@@ -623,23 +532,6 @@
         redirect: '../Admin_dashboard/admin_dashboard.html'
       }
     };
-
-    /* ============================================================
-       ROLE SELECTION
-    ============================================================ */
-    function selectRole(role) {
-      selectedRole = role;
-      const roles = ['citizen', 'officer', 'admin'];
-
-      roles.forEach(r => {
-        document.getElementById('role-' + r).classList.toggle('active', r === role);
-      });
-
-      const cfg = ROLE_CONFIG[role];
-      document.getElementById('credHintText').innerHTML = cfg.hint;
-      document.getElementById('loginBtn').innerHTML =
-        `<i class="fa-solid fa-right-to-bracket"></i>&nbsp; Login as ${cfg.label}`;
-    }
 
     /* ============================================================
        TAB SWITCH
@@ -671,12 +563,21 @@
     ============================================================ */
     function handleLogin(e) {
       e.preventDefault();
+      const username = document.getElementById('loginUsername').value.toLowerCase();
       const btn = document.getElementById('loginBtn');
       btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>&nbsp; Authenticating...';
       btn.disabled = true;
 
+      // Automatic Role Detection
+      let role = 'citizen';
+      if (username.includes('admin')) {
+        role = 'admin';
+      } else if (username.includes('officer')) {
+        role = 'officer';
+      }
+
       setTimeout(() => {
-        window.location.href = ROLE_CONFIG[selectedRole].redirect;
+        window.location.href = ROLE_CONFIG[role].redirect;
       }, 900);
     }
 

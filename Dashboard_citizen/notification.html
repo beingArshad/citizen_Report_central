@@ -93,7 +93,7 @@
     </div>
 
     <div class="notification-list" id="notificationList">
-      <!-- Dynamic notifications will be loaded here -->
+      
     </div>
     
   </div>
@@ -128,7 +128,7 @@
       document.getElementById("navMenu").classList.toggle("active");
     }
 
-    // Simulate backend data where only completed complaints send notifications
+    
     const mockComplaints = [
       { id: '1045', title: 'Broken Streetlight near Main Road', status: 'Pending', date: '10 May 2026' },
       { id: '1022', title: 'Garbage dump not cleared', status: 'Resolved', date: '05 May 2026', resolvedDate: '07 May 2026' },
@@ -173,8 +173,8 @@
       container.innerHTML = html;
     }
 
-    // Initial render
-    renderNotifications();
+  
+  
 
   </script>
 </body>
