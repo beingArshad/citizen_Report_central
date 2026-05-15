@@ -35,14 +35,7 @@
   <div class="form-container">
     <form id="complaintForm">
       
-      <div class="form-group">
-        <label>Voice Assistance (Describe your problem)</label>
-        <button type="button" id="voiceBtn" class="voice-btn idle">
-          <i class="fa-solid fa-microphone"></i> Start Voice Recording
-        </button>
-        <div id="voiceStatus" style="margin-top: 10px; font-size: 0.9rem; color: var(--text-light); text-align: center;"></div>
-      </div>
-
+     
       <div class="form-group">
         <label for="title">Title of the Issue *</label>
         <input type="text" id="title" required placeholder="e.g., Broken Streetlight">
@@ -118,97 +111,6 @@
     </div>
   </footer>
 
-  <script>
-    function toggleNav() {
-      document.getElementById("navMenu").classList.toggle("active");
-    }
-
-    // Set default date/time
-    const now = new Date();
-    document.getElementById('date').valueAsDate = now;
-    document.getElementById('time').value = now.toTimeString().substring(0,5);
-
-    // Voice Recording API
-    const voiceBtn = document.getElementById('voiceBtn');
-    const titleInput = document.getElementById('title');
-    const addressInput = document.getElementById('address');
-    const voiceStatus = document.getElementById('voiceStatus');
-    
-    let isRecording = false;
-    let recognition;
-
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      recognition = new SpeechRecognition();
-      recognition.continuous = false;
-      recognition.interimResults = false;
-      recognition.lang = 'en-US';
-
-      recognition.onstart = function() {
-        isRecording = true;
-        voiceBtn.classList.remove('idle');
-        voiceBtn.classList.add('recording');
-        voiceBtn.innerHTML = '<i class="fa-solid fa-stop"></i> Stop Recording';
-        voiceStatus.innerText = "Listening... Speak your problem title and address.";
-      };
-
-      recognition.onresult = function(event) {
-        const transcript = event.results[0][0].transcript;
-        voiceStatus.innerText = "Transcribed: " + transcript;
-        
-        // Simple logic: Put first half in title, second half in address for demo purposes
-        const words = transcript.split(' ');
-        if(words.length > 4) {
-           const mid = Math.floor(words.length / 2);
-           titleInput.value = words.slice(0, mid).join(' ');
-           addressInput.value = words.slice(mid).join(' ');
-        } else {
-           titleInput.value = transcript;
-        }
-      };
-
-      recognition.onerror = function(event) {
-        voiceStatus.innerText = "Error occurred in recognition: " + event.error;
-      };
-
-      recognition.onend = function() {
-        isRecording = false;
-        voiceBtn.classList.remove('recording');
-        voiceBtn.classList.add('idle');
-        voiceBtn.innerHTML = '<i class="fa-solid fa-microphone"></i> Start Voice Recording';
-        setTimeout(() => voiceStatus.innerText = "", 3000);
-      };
-
-      voiceBtn.addEventListener('click', () => {
-        if (isRecording) {
-          recognition.stop();
-        } else {
-          recognition.start();
-        }
-      });
-    } else {
-      voiceBtn.style.display = 'none';
-      voiceStatus.innerText = "Voice recognition not supported in your browser.";
-    }
-
-    // File input handlers
-    document.getElementById('imageUpload').addEventListener('change', function(e) {
-      if(e.target.files[0]) {
-        document.getElementById('imagePlaceholder').innerHTML = '<i class="fa-solid fa-check" style="color: green;"></i><span>' + e.target.files[0].name + '</span>';
-      }
-    });
-
-    document.getElementById('videoUpload').addEventListener('change', function(e) {
-      if(e.target.files[0]) {
-        document.getElementById('videoPlaceholder').innerHTML = '<i class="fa-solid fa-check" style="color: green;"></i><span>' + e.target.files[0].name + '</span>';
-      }
-    });
-
-    document.getElementById('complaintForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('Complaint submitted successfully!');
-      window.location.href = './citizen.html';
-    });
-  </script>
+  
 </body>
 </html>
