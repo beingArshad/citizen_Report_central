@@ -169,8 +169,7 @@
     </div>
 
     <script>
-        // --- 1. DATA STORE (Expanded Database) ---
-        let complaints = [
+            let complaints = [
             // NEW COMPLAINTS
             { id: 'CMP-101', title: 'Main street light not working', category: 'Electricity', location: 'Ward 3, Main Road', assignedOn: '2023-10-24', status: 'new', desc: 'The street light has been out for three days. It is very dark and unsafe for pedestrians at night.', villager: 'Vikram' },
             { id: 'CMP-102', title: 'Drinking water pipe leakage', category: 'Water Supply', location: 'Ward 1, Near School', assignedOn: '2023-10-25', status: 'new', desc: 'Massive leakage near the primary school. Water is flooding the street and being wasted.', villager: 'Chandini' },
@@ -183,7 +182,7 @@
             { id: 'CMP-109', title: 'Pension distribution delayed', category: 'Administration', location: 'Panchayat Office', assignedOn: '2023-10-29', status: 'new', desc: 'Elderly citizens have been waiting for two days, but the distribution officer has not arrived.', villager: 'Venkatesh' },
             { id: 'CMP-110', title: 'Clogged public toilet', category: 'Sanitation', location: 'Ward 2, Market Area', assignedOn: '2023-10-29', status: 'new', desc: 'The public toilet complex is clogged and unusable. Needs immediate cleaning and maintenance.', villager: 'Arshad' },
 
-            // ONGOING COMPLAINTS
+            
             { id: 'CMP-091', title: 'Road repair near panchayat', category: 'Infrastructure', location: 'Center Village', approvedOn: '2023-10-22', phase: '50%', status: 'ongoing', worker: 'Suresh (Mason)', updateDesc: 'Materials arrived, leveling in progress.', villager: 'Admin' },
             { id: 'CMP-092', title: 'Transformer replacement', category: 'Electricity', location: 'Ward 4, South', approvedOn: '2023-10-23', phase: '75%', status: 'ongoing', worker: 'Mahesh (Electrician)', updateDesc: 'New transformer mounted, waiting for main line connection.', villager: 'Chandini' },
             { id: 'CMP-093', title: 'Clearing blocked main drain', category: 'Sanitation', location: 'Ward 1, Market', approvedOn: '2023-10-24', phase: '25%', status: 'ongoing', worker: 'Ravi (Sanitation)', updateDesc: 'Initial inspection done, JCB required to remove heavy silt.', villager: 'Gopi' },
@@ -214,7 +213,7 @@
             return new Date().toISOString().split('T')[0];
         }
 
-        // --- 2. RENDER TABLE ---
+     
         function renderTable() {
             const thead = document.getElementById('table-head');
             const tbody = document.getElementById('complaints-tbody');
@@ -344,7 +343,7 @@
                     complaints[index].officerNotes = document.getElementById('officer-notes').value;
                     alert(`Complaint ${activeComplaintId} has been rejected.`);
                 } else {
-                    return; // Cancel rejection
+                    return; 
                 }
             }
 

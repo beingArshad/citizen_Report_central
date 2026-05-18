@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complaints Analysis Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="./css/anaysis.css">
+    <link rel="stylesheet" href="../css/anaysis.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,7 @@
 <body>
     <div class="top-bar">
         <div class="logo">
-            <img src="../assets/finallogo.png" alt="Rural Governance Logo" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(102,126,234,0.4);">
+            <img src="../images/logo.png" alt="Logo">
         </div>
 
         <button class="hamburger toggle-btn" onclick="toggleNav()">
@@ -46,11 +46,12 @@
             </div>
 
             <div class="card">
-                <h2>Resolved vs Received (Monthly)</h2>
+                <h2>Resolved vs Received (Yearly)</h2>
                 <div class="chart-container">
                     <canvas id="resolvedComplaintsChart"></canvas>
                 </div>
             </div>
+                
         </div>
 
         <div class="stats-grid">
@@ -162,18 +163,18 @@
         new Chart(ctxResolved, {
             type: 'bar',
             data: {
-                labels: months.slice(4), // Showing only last 6 months for better spacing
+                labels: ['2025', '2026', '2027', '2028', '2029', '2030'],
                 datasets: [
                     {
                         label: 'Received',
-                        data: [38, 52, 48, 60, 55, 65],
+                        data: [1500, 1800, 2000, 2200, 1900, 2100],
                         backgroundColor: '#e5e7eb', // Light gray
                         borderRadius: 4,
                         barPercentage: 0.6
                     },
                     {
                         label: 'Resolved',
-                        data: [35, 40, 42, 50, 48, 55],
+                        data: [1300, 1600, 1800, 2000, 1700, 1900],
                         backgroundColor: '#10b981', // Emerald Green
                         borderRadius: 4,
                         barPercentage: 0.6
