@@ -22,7 +22,7 @@
       <li><a href="./citizen.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
       <li><a href="./notification.html"><i class="fa-solid fa-bell"></i> Notifications</a></li>
       <li><a href="./profile.html" style="color: var(--primary);"><i class="fa-solid fa-user"></i> Profile</a></li>
-      <li><a href="./index.html" style="color: #ef4444;"><i class="fa-solid fa-right-from-bracket" style="color: #ef4444;"></i> Logout</a></li>
+      <li><a href="/index.html" style="color: #ef4444;"><i class="fa-solid fa-right-from-bracket" style="color: #ef4444;"></i> Logout</a></li>
     </ul>
   </nav>
 
@@ -33,7 +33,7 @@
 
   <div class="profile-container">
     
-    <!-- Left Sidebar: Photo & Actions -->
+    
     <div class="profile-sidebar">
       <img src="https://ui-avatars.com/api/?name=Afrah+Shaik&background=667eea&color=fff&size=150" alt="Profile Photo" class="profile-photo" id="profileImagePreview">
       
@@ -49,11 +49,11 @@
       </div>
     </div>
 
-    <!-- Right Main Area: Details -->
+    
     <div class="profile-main">
       <div class="profile-header">
         <h2>Personal Details</h2>
-        <a href="./home.html" class="btn btn-outline" style="color: #ef4444; border-color: #ef4444;"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a>
+        <a href="/index.html" class="btn btn-outline" style="color: #ef4444; border-color: #ef4444;"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a>
       </div>
 
       <div class="profile-details">
@@ -124,7 +124,7 @@
       document.getElementById("navMenu").classList.toggle("active");
     }
 
-    // Handle photo upload preview
+
     document.getElementById('photoUpload').addEventListener('change', function(e) {
       const file = e.target.files[0];
       if (file) {

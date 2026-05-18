@@ -17,7 +17,7 @@
   --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* Global Reset & Scrollbar */
+
 * {
   margin: 0;
   padding: 0;
@@ -50,9 +50,6 @@ body {
   background: var(--secondary);
 }
 
-/* ==========================================================================
-   Navigation Bar (Glassmorphism) exactly matching citizen.css
-   ========================================================================== */
 nav {
   display: flex;
   justify-content: space-between;
@@ -123,7 +120,6 @@ nav ul li a:hover i {
   cursor: pointer;
 }
 
-/* Specific buttons for logged out user */
 .login_btn {
   background: var(--primary-gradient);
   color: var(--white) !important;
@@ -176,9 +172,7 @@ nav ul li a:hover i {
   }
 }
 
-/* ==========================================================================
-   Hero Video Section (Glassmorphism style)
-   ========================================================================== */
+/* video */
 .hero {
   position: relative;
   width: 100%;
@@ -188,9 +182,6 @@ nav ul li a:hover i {
   background: #111;
 }
 
-/* ==========================================================================
-   Hero Carousel
-   ========================================================================== */
 .carousel {
   width: 100%;
   height: 100%;
@@ -345,9 +336,6 @@ nav ul li a:hover i {
   color: var(--white);
 }
 
-/* ==========================================================================
-   Features Section (Glassmorphism Cards)
-   ========================================================================== */
 .features {
   padding: 80px 5%;
   text-align: center;
@@ -423,9 +411,6 @@ nav ul li a:hover i {
   color: var(--text-light);
 }
 
-/* ==========================================================================
-   Timeline Section
-   ========================================================================== */
 .timeline-section {
   padding: 80px 5%;
   background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
@@ -488,9 +473,6 @@ nav ul li a:hover i {
   text-align: left;
 }
 
-/* ==========================================================================
-   Stats Section
-   ========================================================================== */
 .stats-section {
   padding: 80px 5%;
   text-align: center;
@@ -542,9 +524,6 @@ nav ul li a:hover i {
   font-weight: 500;
 }
 
-/* ==========================================================================
-   Impact Comparison Slider
-   ========================================================================== */
 .impact-section {
   padding: 80px 5%;
   max-width: 1000px;
@@ -584,23 +563,16 @@ nav ul li a:hover i {
 
 .comparison-slider .img-wrapper img {
   width: 1000px; /* Match max-width of container approximately to prevent squash, or use object-fit */
-  /* Wait, object-fit: cover on absolute img inside wrapper will resize based on wrapper width, which breaks alignment.
-     To fix: width of img should be 100vw or fixed to container.
-     Better approach: img width = container width. Since container is 100% of max 1000px, 
-     we can use min-width: 1000px but it breaks on mobile.
-     Best approach: object-position or use width: 100% on a fixed size container. 
-     Wait, actually `width: auto; min-width: 100%;` or JS can calculate it.
-     Simpler CSS-only way: */
+  
 }
-/* Fixed CSS for before image so it doesn't squash */
+
 .comparison-slider .img-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: left center;
 }
-/* The above object-fit on a changing width container will still shift the image center. 
-   To perfectly align, the img must be the exact width of the PARENT container (.comparison-slider). */
+
 .comparison-slider .img-wrapper img {
   width: 1000px; /* Max width */
   max-width: none;
@@ -667,9 +639,7 @@ nav ul li a:hover i {
 .before-label { left: 20px; }
 .after-label { right: 20px; }
 
-/* ==========================================================================
-   Footer exactly matching citizen.css
-   ========================================================================== */
+
 footer {
   background: var(--text-dark);
   color: var(--white);
